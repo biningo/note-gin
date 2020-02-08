@@ -16,7 +16,7 @@ func (this Article) GetArticleTag() (tags []Tag) {
 }
 
 func (this Article) GetArticleInfo() {
-	db.First(&this)
+	db.Where(this).First(&this)
 }
 func (this Article) GetDeletedArticle() (articles []Article) {
 	db.Find(&articles, "deleted=?", true)
@@ -36,5 +36,9 @@ func (this Article) Update(newArticle Article) {
 //Delete
 func (this Article) Delete() {
 	this.Deleted = true
-	db.Model(&this).Update("deleted", true)
+	db.Model(&this).Where(this).Update("deleted", true)
+}
+
+func (this Article) DeleteForever() {
+	db.Delete(&Article{}, "deleted=?", true)
 }

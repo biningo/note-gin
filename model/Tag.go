@@ -1,5 +1,7 @@
 package model
 
+import "note-gin/config"
+
 type Tag struct {
 	BaseModel
 	Title    string    `form:"title" json:"title"`
@@ -16,8 +18,8 @@ func (this Tag) GetAllTag() (tags []Tag) {
 	return
 }
 
-func (this Tag) GetRelateArticle() (articles []Article) {
-	db.Model(&this).Association("articles").Find(&articles)
+func (this Tag) GetRelateArticle(page int) (articles []Article) {
+	db.Model(&this).Offset((page - 1) * config.PageSize).Limit(config.PageSize).Order("created_at desc").Association("articles").Find(&articles)
 	return
 }
 

@@ -24,7 +24,7 @@ func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article) {
 	} else if fdsCount == 0 {
 		offset := config.PageSize - (this.CountSubFolder() % config.PageSize)
 		page = page - ((this.CountSubFolder() / config.PageSize) + 1)
-		db.Limit(config.PageSize).Offset(offset + (page-1)*config.PageSize)
+		db.Limit(config.PageSize).Offset(offset + (page-1)*config.PageSize).Find(&articles)
 	}
 	return
 }
@@ -68,8 +68,7 @@ func (this Folder) Update(newFolder Folder) {
 	db.Where(this).Assign(newFolder).FirstOrCreate(&this)
 }
 
-//Delete
-
+//Delete递归删除
 func deleteDFS(FolderID uint64, fds *[]Folder) {
 
 	add_fds := []Folder{}

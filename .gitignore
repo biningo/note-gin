@@ -1,10 +1,10 @@
 <<<<<<< HEAD
 .vscode/
 .env
-.idea
+./.idea
 docker-compose.yml
 fabfile.py
-go.sum
+./go.sum
 debug
 =======
 # Binaries for programs and plugins
