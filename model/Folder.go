@@ -64,8 +64,8 @@ func (this Folder) Add() {
 }
 
 //Update
-func (this Folder) Update(newFolder Folder) {
-	db.Where(this).Assign(newFolder).FirstOrCreate(&this)
+func (this Folder) Update() {
+	db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
 }
 
 //Delete递归删除

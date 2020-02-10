@@ -4,6 +4,7 @@ import (
 	"container/list"
 	"fmt"
 	"testing"
+	"time"
 )
 
 func change(arr *[]int) {
@@ -13,6 +14,7 @@ func change(arr *[]int) {
 
 type Test struct {
 	Flag bool
+	Time time.Time
 }
 
 func TestSub(t *testing.T) {
@@ -29,5 +31,6 @@ func TestSub(t *testing.T) {
 
 	arr = []int{1, 2, 3}
 	arr = append(arr, 8, 9)
-	fmt.Println(Test{})
+	tt := Test{}
+	fmt.Println(tt.Time.IsZero())
 }

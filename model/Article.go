@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type Article struct {
 	BaseModel
 	Title    string `form:"title" json:"title"`
@@ -36,7 +38,8 @@ func (this Article) Update(newArticle Article) {
 //Delete
 func (this Article) Delete() {
 	this.Deleted = true
-	db.Model(&this).Where(this).Update("deleted", true)
+	this.DeletedTime = time.Now()
+	db.Model(&this).Where(this).Update(this)
 }
 
 func (this Article) DeleteForever() {
