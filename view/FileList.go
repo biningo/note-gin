@@ -3,6 +3,6 @@ package view
 import "note-gin/model"
 
 type FileList struct {
-	FolderItems  []model.Folder
-	ArticleItems []model.Article
+	Folders  []model.Folder
+	Articles []model.Article
 }

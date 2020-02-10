@@ -11,17 +11,14 @@ import (
 func Add(c *gin.Context) {
 	folder := model.Folder{}
 	err := c.ShouldBind(&folder)
+
 	if err != nil {
 		log.Println(err)
 	}
 
 	folder.Add()
 
-	c.JSON(200, view.RespBean{
-		Code: 200,
-		Msg:  "目录创建成功!",
-		Data: folder,
-	})
+	c.JSON(200, view.OkWithData("目录创建成功！", folder))
 
 }
 
@@ -32,4 +29,5 @@ func Update(c *gin.Context) {
 	utils.ErrReport(err)
 
 	newFolder.Update()
+	c.JSON(200, view.OkWithMsg("修改成功！"))
 }

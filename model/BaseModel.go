@@ -1,7 +1,6 @@
 package model
 
 import (
-	"note-gin/database"
 	"time"
 )
 
@@ -12,5 +11,3 @@ type BaseModel struct {
 	Deleted     bool      `form:"deleted" json:"deleted"`
 	DeletedTime time.Time `form:"deleted_time" json:"deleted_time"`
 }
-
-var db = database.DB

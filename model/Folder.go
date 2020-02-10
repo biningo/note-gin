@@ -30,7 +30,7 @@ func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article) {
 }
 
 func (this Folder) GetSubFolder(page, PageSize int) (fds []Folder, count int) {
-	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.FolderID).Count(&count)
+	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.ID).Count(&count)
 	return
 }
 
@@ -79,24 +79,24 @@ func deleteDFS(FolderID uint64, fds *[]Folder) {
 		db.Delete(v)
 	}
 
-	for _, v := range add_fds {
-		(*fds) = append((*fds), v)
-	}
+	(*fds) = append((*fds), add_fds...)
 
 	if len(*fds) > 1 {
 		id := (*fds)[0].ID
+		db.Unscoped().Delete(&(*fds)[0])
 		*fds = (*fds)[1:]
 		deleteDFS(id, fds)
-		db.Unscoped().Delete(&(*fds)[0])
+
 	} else if len(*fds) == 1 {
 		id := (*fds)[0].ID
-		deleteDFS(id, fds)
-		db.Unscoped().Delete(&(*fds)[0])
+		db.Delete(&(*fds)[0])
+		deleteDFS(id, &[]Folder{})
 	} else {
 		return
 	}
 }
 
 func (this Folder) Delete() {
+	db.Delete(&this)
 	deleteDFS(this.ID, &[]Folder{})
 }
