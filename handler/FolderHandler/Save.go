@@ -2,7 +2,6 @@ package FolderHandler
 
 import (
 	"github.com/gin-gonic/gin"
-	"log"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/view"
@@ -10,12 +9,10 @@ import (
 
 func Add(c *gin.Context) {
 	folder := model.Folder{}
-	err := c.ShouldBind(&folder)
+	folder.Title = c.Query("title")
+	FolderTitle := c.Query("FolderTitle")
 
-	if err != nil {
-		log.Println(err)
-	}
-
+	folder.FolderID = StaticFolder.GetFolderByTitle(FolderTitle).ID
 	folder.Add()
 
 	c.JSON(200, view.OkWithData("目录创建成功！", folder))

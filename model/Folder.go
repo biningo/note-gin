@@ -42,6 +42,10 @@ func (this Folder) GetSubArticle(page, PageSize int) (articles []Article, count 
 func (this Folder) GetFolderInfo() {
 	db.First(&this)
 }
+func (this Folder) GetFolderByTitle(title string) Folder {
+	db.Where("title=?", title).First(&this)
+	return this
+}
 
 //count
 func (this Folder) CountSubFile() int {
@@ -69,7 +73,7 @@ func (this Folder) Update() {
 }
 
 //Delete递归删除
-func deleteDFS(FolderID uint64, fds *[]Folder) {
+func deleteDFS(FolderID int64, fds *[]Folder) {
 
 	add_fds := []Folder{}
 	add_articles := []Article{}

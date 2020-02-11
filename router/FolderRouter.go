@@ -11,6 +11,5 @@ func FolderRouter(base string) {
 	r.GET("/update", FolderHandler.Update)
 	r.GET("/add", FolderHandler.Add)
 	r.GET("/delete", FolderHandler.Delete)
-
 	return
 }

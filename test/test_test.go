@@ -3,6 +3,7 @@ package test
 import (
 	"container/list"
 	"fmt"
+	"note-gin/utils/RedisClient"
 	"testing"
 	"time"
 )
@@ -33,4 +34,10 @@ func TestSub(t *testing.T) {
 	arr = append(arr, 8, 9)
 	tt := Test{}
 	fmt.Println(tt.Time.IsZero())
+}
+
+func TestRedis(t *testing.T) {
+	RedisClient.RedisInit()
+	length := RedisClient.RedisClient.LLen("folder_nav").Val()
+	fmt.Println(length)
 }
