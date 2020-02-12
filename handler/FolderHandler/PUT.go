@@ -12,7 +12,7 @@ func Add(c *gin.Context) {
 	folder.Title = c.Query("title")
 	FolderTitle := c.Query("FolderTitle")
 
-	folder.FolderID = StaticFolder.GetFolderByTitle(FolderTitle).ID
+	folder.FolderID = model.Folder{}.GetFolderByTitle(FolderTitle).ID
 	folder.Add()
 
 	c.JSON(200, view.OkWithData("目录创建成功！", folder))

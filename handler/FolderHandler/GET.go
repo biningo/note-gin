@@ -2,7 +2,6 @@ package FolderHandler
 
 import (
 	"github.com/gin-gonic/gin"
-	"log"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/utils/RedisClient"
@@ -14,7 +13,6 @@ func GetSubFile(c *gin.Context) {
 	folder := model.Folder{}
 	err := c.ShouldBindQuery(&folder)
 	utils.ErrReport(err)
-	log.Println(folder)
 
 	//导航
 

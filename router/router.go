@@ -12,6 +12,7 @@ func NewRouter() *gin.Engine {
 	Router = r
 
 	FolderRouter("/folder")
+	ArticleRouter("/article")
 
 	return r
 }

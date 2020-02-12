@@ -2,18 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69e80063-3e0f-4ccf-819d-8bb04da3e50b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/RedisClient/FolderNav.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/RedisClient/RedisClient.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handler/ArticleHandler/DELETE.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handler/ArticleHandler/GET.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handler/ArticleHandler/PUT.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/Save.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/Save.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/Select.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/Select.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/BaseModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/BaseModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/ConstVal.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/Delete.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/DELETE.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/Save.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/PUT.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/Select.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/GET.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/NavMiddle.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Article.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/Folder.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Folder.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/FolderRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/FolderRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/FileList.go" beforeDir="false" afterPath="$PROJECT_DIR$/view/FileList.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +54,7 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.vendoring.notification.had.been.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GoWeb" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -149,7 +151,8 @@
     <MESSAGE value="完成Model层的业务" />
     <MESSAGE value="目录和文章Handler" />
     <MESSAGE value="完成Folder CRUD以及目录进入 还差导航栏没有实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成Folder CRUD以及目录进入 还差导航栏没有实现" />
+    <MESSAGE value="完成目录导航自由切换 好累 一下午bug排查" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成目录导航自由切换 好累 一下午bug排查" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -160,34 +163,34 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="500" y="241" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1580638793850" />
-    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1581410289720">
+    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1581410393338">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581410289720" />
-    <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1581398545492">
+    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581410393338" />
+    <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1581426284979">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1581398545492" />
-    <state width="1493" height="226" key="GridCell.Tab.0.bottom" timestamp="1581410232908">
+    <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1581426284979" />
+    <state width="1493" height="232" key="GridCell.Tab.0.bottom" timestamp="1581492107730">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581410232908" />
-    <state width="1493" height="226" key="GridCell.Tab.0.center" timestamp="1581410232908">
+    <state width="1493" height="232" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581492107730" />
+    <state width="1493" height="232" key="GridCell.Tab.0.center" timestamp="1581492107730">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581410232908" />
-    <state width="1493" height="226" key="GridCell.Tab.0.left" timestamp="1581410232908">
+    <state width="1493" height="232" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581492107730" />
+    <state width="1493" height="232" key="GridCell.Tab.0.left" timestamp="1581492107730">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581410232908" />
-    <state width="1493" height="226" key="GridCell.Tab.0.right" timestamp="1581410232908">
+    <state width="1493" height="232" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581492107730" />
+    <state width="1493" height="232" key="GridCell.Tab.0.right" timestamp="1581492107730">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="226" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581410232908" />
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1581343464191">
+    <state width="1493" height="232" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581492107730" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1581410397000">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581343464191" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581410397000" />
     <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581342440511">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

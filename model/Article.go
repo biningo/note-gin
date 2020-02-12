@@ -21,27 +21,27 @@ func (this Article) GetArticleInfo() {
 	db.Where(this).First(&this)
 }
 func (this Article) GetDeletedArticle() (articles []Article) {
-	db.Find(&articles, "deleted=?", true)
+	db.Find(&articles, "deleted=?", 0)
 	return
 }
 
 //Create
 func (this Article) Add() {
-	db.FirstOrCreate(&this, this)
+	db.Create(&this)
 }
 
 //Update
-func (this Article) Update(newArticle Article) {
-	db.Where(this).Assign(newArticle).FirstOrCreate(&this)
+func (this Article) Update() {
+	db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
 }
 
 //Delete
 func (this Article) Delete() {
 	this.Deleted = true
 	this.DeletedTime = time.Now()
-	db.Model(&this).Where(this).Update(this)
+	db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
 }
 
 func (this Article) DeleteForever() {
-	db.Delete(&Article{}, "deleted=?", true)
+	db.Not("deleted=?", 0).Delete(&Article{})
 }
