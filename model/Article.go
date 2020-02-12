@@ -1,6 +1,9 @@
 package model
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 type Article struct {
 	BaseModel
@@ -21,7 +24,7 @@ func (this Article) GetArticleInfo() {
 	db.Where(this).First(&this)
 }
 func (this Article) GetDeletedArticle() (articles []Article) {
-	db.Find(&articles, "deleted=?", 0)
+	db.Find(&articles, "deleted=?", 1)
 	return
 }
 
@@ -43,5 +46,17 @@ func (this Article) Delete() {
 }
 
 func (this Article) DeleteForever() {
-	db.Not("deleted=?", 0).Delete(&Article{})
+	db.Where("deleted <> 0").Delete(&Article{})
+}
+func (this Article) Recover() error {
+	hasFolder := 0
+	db.First(&this)
+	db.Where("id=?", this.FolderID).Count(&hasFolder)
+	if hasFolder != 0 {
+		db.Model(&this).Where("id=?", this.ID).Update("deleted", 0)
+		return nil
+	} else {
+		return errors.New("父目录不存在！恢复失败")
+	}
+
 }

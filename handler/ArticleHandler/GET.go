@@ -26,3 +26,18 @@ func GetRubbishArticle(c *gin.Context) {
 	}
 	c.JSON(200, resp)
 }
+
+//垃圾箱恢复
+func Recover(c *gin.Context) {
+	article := model.Article{}
+	err := c.ShouldBind(&article)
+	utils.ErrReport(err)
+
+	ok := article.Recover()
+	if ok != nil {
+		c.JSON(200, view.ErrorWithMsg(ok.Error()))
+	} else {
+		c.JSON(200, view.OkWithMsg("恢复成功！"))
+	}
+
+}

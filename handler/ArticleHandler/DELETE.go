@@ -18,6 +18,7 @@ func Delete(c *gin.Context) {
 }
 
 //清空垃圾桶
-func ForeverDelete(c *gin.Context) {
+func DeleteForever(c *gin.Context) {
 	model.Article{}.DeleteForever()
+	c.JSON(200, view.OkWithMsg("清空成功！"))
 }
