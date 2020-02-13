@@ -1,9 +1,9 @@
 package config
 
-const(
-	Admin=iota
+const (
+	Admin = iota
 	User
 	Visitor
 )
 
-const PageSize  = 13
+const PageSize = 13

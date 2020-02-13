@@ -11,8 +11,8 @@ func NewRouter() *gin.Engine {
 	})
 	Router = r
 
-	FolderRouter("/folder")
-	ArticleRouter("/article")
-
+	FolderRouter("folder")
+	ArticleRouter("article")
+	QiniuRouter("qiniu")
 	return r
 }

@@ -9,4 +9,5 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/onsi/ginkgo v1.12.0 // indirect
 	github.com/onsi/gomega v1.9.0 // indirect
+	github.com/qiniu/api.v7/v7 v7.4.1
 )
