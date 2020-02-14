@@ -33,6 +33,6 @@ func Update(c *gin.Context) {
 
 	newArticle.Update()
 
-	c.JSON(200, view.OkWithMsg("文章修改成功！"))
+	c.JSON(200, view.OkWithData("文章保存成功！", newArticle))
 
 }

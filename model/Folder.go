@@ -31,11 +31,14 @@ func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article) {
 	return
 }
 
+func (this Folder) GetSubFolderNoPage() (folders []Folder) {
+	db.Where("folder_id=?", this.ID).Find(&folders)
+	return
+}
 func (this Folder) GetSubFolder(page, PageSize int) (fds []Folder, count int) {
 	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.ID).Count(&count)
 	return
 }
-
 func (this Folder) GetSubArticle(limit, offset int) (articles []Article, count int) {
 	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Find(&articles, "folder_id=?", this.ID).Find(&count)
 	return
@@ -56,11 +59,11 @@ func (this Folder) CountSubFile() int {
 }
 
 func (this Folder) CountSubFolder() (count int) {
-	db.Model(&Folder{}).Where("folder_id=?", this.FolderID).Count(&count)
+	db.Model(&Folder{}).Where("folder_id=?", this.ID).Count(&count)
 	return
 }
 func (this Folder) CountSubArticle() (count int) {
-	db.Model(&Article{}).Where("folder_id=?", this.FolderID).Count(&count)
+	db.Model(&Article{}).Where("folder_id=?", this.ID).Count(&count)
 	return
 }
 

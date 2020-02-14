@@ -2,6 +2,7 @@ package FolderHandler
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/utils/RedisClient"
@@ -31,4 +32,23 @@ func GetSubFile(c *gin.Context) {
 		Nav:      nav,
 	}
 	c.JSON(200, resp)
+}
+
+func GetSubFolder(c *gin.Context) {
+	folder := model.Folder{}
+	err := c.ShouldBind(&folder)
+	utils.ErrReport(err)
+
+	folders := folder.GetSubFolderNoPage()
+	//这里出错了一个小细节  make指定长度切片就可以直接引用位置了 如果再append的方式加入元素则会重新创建空间
+	FolderSelectList := make([]view.FolderSelect, len(folders))
+	for i, v := range folders {
+		FolderSelectList[i] = view.FolderSelect{
+			Value: v.ID,
+			Label: v.Title,
+			Leaf:  v.CountSubFolder() <= 0,
+		}
+	}
+	log.Println(FolderSelectList)
+	c.JSON(200, view.OkWithData("", FolderSelectList))
 }

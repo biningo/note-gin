@@ -11,7 +11,6 @@ type Article struct {
 	FolderID int64  `form:"folder_id" json:"folder_id"`
 	Tags     []Tag  `many2many:"article_tag" form:"tags" json:"tags"`
 	MkValue  string `form:"mkValue" json:"mkValue" type:"text"`
-	MkHtml   string `form:"mkHtml" json:"mkHtml" type:"text"`
 }
 
 //Find
@@ -33,9 +32,13 @@ func (this Article) Add() {
 	db.Create(&this)
 }
 
-//Update
+//Update Or Create
 func (this Article) Update() {
-	db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
+	if this.ID != 0 {
+		db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
+	} else {
+		db.Create(&this)
+	}
 }
 
 //Delete
