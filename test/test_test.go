@@ -53,3 +53,16 @@ func TestAA(t *testing.T) {
 	log.Println(len(arr))
 	fmt.Println(arr)
 }
+
+func Change(arr *[]int) {
+	*arr = append(*arr, 88)
+}
+
+func TestArr(t *testing.T) {
+	arr := []int{1, 2}
+	Change(&arr)
+	log.Println(arr)
+	arr = []int{1, 2, 3, 4, 5}
+	log.Println(arr[1:len(arr)])
+	log.Println(arr[1:])
+}

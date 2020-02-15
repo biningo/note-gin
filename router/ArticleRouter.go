@@ -12,5 +12,5 @@ func ArticleRouter(base string) {
 
 	r.POST("/add", ArticleHandler.Add)
 	r.POST("/update", ArticleHandler.Update)
-
+	r.POST("/edit", ArticleHandler.Edit)
 }

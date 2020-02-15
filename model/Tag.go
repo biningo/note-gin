@@ -9,6 +9,14 @@ type Tag struct {
 }
 
 //增加或查询
+func (this Tag) GetTagByNames(arr []string) (tags []Tag) {
+	for _, v := range arr {
+		tag := Tag{}
+		db.Where("title=?", v).FirstOrCreate(&tag)
+		tags = append(tags, tag)
+	}
+	return
+}
 func (this Tag) GetTag() {
 	db.FirstOrCreate(&this, this)
 }

@@ -2,7 +2,6 @@ package FolderHandler
 
 import (
 	"github.com/gin-gonic/gin"
-	"log"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/utils/RedisClient"
@@ -49,6 +48,5 @@ func GetSubFolder(c *gin.Context) {
 			Leaf:  v.CountSubFolder() <= 0,
 		}
 	}
-	log.Println(FolderSelectList)
 	c.JSON(200, view.OkWithData("", FolderSelectList))
 }

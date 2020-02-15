@@ -18,7 +18,6 @@ func (this Article) GetArticleTag() (tags []Tag) {
 	db.Model(&this).Association("tags").Find(&tags)
 	return
 }
-
 func (this Article) GetArticleInfo() {
 	db.Where(this).First(&this)
 }
@@ -28,8 +27,9 @@ func (this Article) GetDeletedArticle() (articles []Article) {
 }
 
 //Create
-func (this Article) Add() {
+func (this Article) Add(article *Article) {
 	db.Create(&this)
+	*article = this
 }
 
 //Update Or Create

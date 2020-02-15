@@ -1,6 +1,7 @@
 package model
 
 import (
+	"log"
 	"note-gin/config"
 )
 
@@ -13,6 +14,26 @@ type Folder struct {
 //Find
 func (this Folder) GetRootFolder() (roots []Folder) {
 	db.Find(&roots, "folder_id=?", 0)
+	return
+}
+
+//目录路径查找[root->sub]
+func (this Folder) GetFolderPath(FolderID int64, DirPath *[]int64) {
+	if FolderID == 0 {
+		return
+	}
+	folder := Folder{}
+	db.Where("id=?", FolderID).First(&folder)
+
+	if folder.FolderID != 0 {
+		*DirPath = append([]int64{folder.FolderID}, *DirPath...)
+		this.GetFolderPath(folder.FolderID, DirPath)
+	} else {
+		return
+	}
+}
+func (this Folder) GetFolderByID() {
+	db.Where("id=?", this.ID).First(&this)
 	return
 }
 
@@ -89,10 +110,10 @@ func deleteDFS(FolderID int64, fds *[]Folder) {
 	}
 
 	(*fds) = append((*fds), add_fds...)
-
+	log.Println(*fds)
 	if len(*fds) > 1 {
 		id := (*fds)[0].ID
-		db.Unscoped().Delete(&(*fds)[0])
+		db.Delete(&(*fds)[0])
 		*fds = (*fds)[1:]
 		deleteDFS(id, fds)
 
@@ -106,6 +127,7 @@ func deleteDFS(FolderID int64, fds *[]Folder) {
 }
 
 func (this Folder) Delete() {
+	id := this.ID
 	db.Delete(&this)
-	deleteDFS(this.ID, &[]Folder{})
+	deleteDFS(id, &[]Folder{})
 }
