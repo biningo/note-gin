@@ -1,8 +1,8 @@
 package model
 
 import (
-	"log"
 	"note-gin/config"
+	"time"
 )
 
 type Folder struct {
@@ -89,45 +89,26 @@ func (this Folder) CountSubArticle() (count int) {
 }
 
 //Create
-func (this Folder) Add() {
-	db.FirstOrCreate(&this, this)
+func (this *Folder) Add() {
+	db.Create(this)
 }
 
 //Update
-func (this Folder) Update() {
-	db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
+func (this *Folder) Update() {
+	db.Model(this).Where("id=?", this.ID).Updates(map[string]interface{}{"title": this.Title, "updated_at": time.Now()})
 }
 
 //Delete递归删除
-func deleteDFS(FolderID int64, fds *[]Folder) {
-
-	add_fds := []Folder{}
-	add_articles := []Article{}
-	db.Find(&add_fds, "folder_id=?", FolderID)
-	db.Find(&add_articles, "folder_id=?", FolderID)
-	for _, v := range add_articles {
+func deleteDFS(FolderID int64) {
+	db.Model(&Article{}).Where("folder_id=?", FolderID).Update("deleted", true)
+	sub_folder := []Folder{}
+	db.Find(&sub_folder, "folder_id=?", FolderID)
+	for _, v := range sub_folder {
 		v.Delete()
-	}
-
-	(*fds) = append((*fds), add_fds...)
-	log.Println(*fds)
-	if len(*fds) > 1 {
-		id := (*fds)[0].ID
-		db.Delete(&(*fds)[0])
-		*fds = (*fds)[1:]
-		deleteDFS(id, fds)
-
-	} else if len(*fds) == 1 {
-		id := (*fds)[0].ID
-		db.Delete(&(*fds)[0])
-		deleteDFS(id, &[]Folder{})
-	} else {
-		return
 	}
 }
 
-func (this Folder) Delete() {
-	id := this.ID
-	db.Delete(&this)
-	deleteDFS(id, &[]Folder{})
+func (this *Folder) Delete() {
+	db.Delete(this)
+	deleteDFS(this.ID)
 }

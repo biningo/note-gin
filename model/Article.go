@@ -27,17 +27,16 @@ func (this Article) GetDeletedArticle() (articles []Article) {
 }
 
 //Create
-func (this Article) Add(article *Article) {
-	db.Create(&this)
-	*article = this
+func (this *Article) Add() {
+	db.Create(this)
 }
 
 //Update Or Create
-func (this Article) Update() {
+func (this *Article) Update() {
 	if this.ID != 0 {
-		db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
+		db.Where("id=?", this.ID).Assign(*this).FirstOrCreate(this)
 	} else {
-		db.Create(&this)
+		db.Create(this)
 	}
 }
 

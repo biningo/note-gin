@@ -24,7 +24,6 @@ func Update(c *gin.Context) {
 	newFolder := model.Folder{}
 	err := c.ShouldBind(&newFolder)
 	utils.ErrReport(err)
-
 	newFolder.Update()
 	c.JSON(200, view.OkWithMsg("修改成功！"))
 }
