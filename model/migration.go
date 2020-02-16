@@ -9,5 +9,6 @@ func migration(DB *gorm.DB) {
 	DB.Set("gorm:table_options", "charset=utf8mb4")
 	DB.AutoMigrate(&User{}).
 		AutoMigrate(&Folder{}).
-		AutoMigrate(&Article{})
+		AutoMigrate(&Article{}).
+		AutoMigrate(&TimeLine{})
 }

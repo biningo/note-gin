@@ -22,7 +22,7 @@ func GetRubbishArticle(c *gin.Context) {
 	articles := model.Article{}.GetDeletedArticle()
 	resp := view.DataList{
 		Items: articles,
-		Total: len(articles),
+		Total: int64(len(articles)),
 	}
 	c.JSON(200, resp)
 }
