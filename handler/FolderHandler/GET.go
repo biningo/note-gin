@@ -33,7 +33,7 @@ func GetSubFile(c *gin.Context) {
 	c.JSON(200, resp)
 }
 
-func GetSubFolder(c *gin.Context) {
+func GetSelectFolder(c *gin.Context) {
 	folder := model.Folder{}
 	err := c.ShouldBind(&folder)
 	utils.ErrReport(err)

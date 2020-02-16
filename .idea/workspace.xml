@@ -4,9 +4,12 @@
     <list default="true" id="69e80063-3e0f-4ccf-819d-8bb04da3e50b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/ArticleHandler/PUT.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/ArticleHandler/PUT.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/PUT.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/PUT.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/GET.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/Article.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Folder.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Folder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Tag.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/migration.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/migration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/FolderRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/FolderRouter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/ArticleSerialize.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/ArticleSerialize.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +153,8 @@
     <MESSAGE value="增加七牛云图床图片云存储 这么简单的一个功能搞了6小时 好累！" />
     <MESSAGE value="完成前端目录选择请求" />
     <MESSAGE value="完成文章的编辑，克服目录路径的显示问题&#10;完成对前端文章展示的序列化" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成文章的编辑，克服目录路径的显示问题&#10;完成对前端文章展示的序列化" />
+    <MESSAGE value="解决数据库插入数据返回接收不到问题&#10;解决目录递归删除" />
+    <option name="LAST_COMMIT_MESSAGE" value="解决数据库插入数据返回接收不到问题&#10;解决目录递归删除" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -161,37 +165,37 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="500" y="241" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1580638793850" />
-    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1581758726246">
+    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1581781126729">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581758726246" />
+    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581781126729" />
     <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1581753881287">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1581753881287" />
-    <state width="1493" height="164" key="GridCell.Tab.0.bottom" timestamp="1581768280289">
+    <state width="1493" height="294" key="GridCell.Tab.0.bottom" timestamp="1581824211515">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="164" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581768280289" />
-    <state width="1493" height="164" key="GridCell.Tab.0.center" timestamp="1581768280289">
+    <state width="1493" height="294" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1581824211515" />
+    <state width="1493" height="294" key="GridCell.Tab.0.center" timestamp="1581824211515">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="164" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581768280289" />
-    <state width="1493" height="164" key="GridCell.Tab.0.left" timestamp="1581768280289">
+    <state width="1493" height="294" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1581824211515" />
+    <state width="1493" height="294" key="GridCell.Tab.0.left" timestamp="1581824211515">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="164" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581768280289" />
-    <state width="1493" height="164" key="GridCell.Tab.0.right" timestamp="1581768280289">
+    <state width="1493" height="294" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1581824211515" />
+    <state width="1493" height="294" key="GridCell.Tab.0.right" timestamp="1581824211515">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="164" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581768280289" />
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1581758728923">
+    <state width="1493" height="294" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1581824211515" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1581781129877">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581758728923" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581342440511">
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581781129877" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581785293235">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581342440511" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1581785293235" />
   </component>
 </project>

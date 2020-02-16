@@ -41,9 +41,8 @@ func Update(c *gin.Context) {
 	article.FolderID = articleView.DirPath[len(articleView.DirPath)-1]
 	article.MkValue = articleView.MkValue
 	article.Title = articleView.Title
-	article.Tags = model.Tag{}.GetTagByNames(articleView.Tags)
-
 	article.Update()
+
 	articleView.UpdatedAt = article.UpdatedAt.Format("2006-01-02")
 	articleView.CreatedAt = article.UpdatedAt.Format("2006-01-02")
 	articleView.ID = article.ID
@@ -58,5 +57,6 @@ func Edit(c *gin.Context) {
 	//目录路径回溯
 	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)  //先添加自己的根目录
 	model.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
+
 	c.JSON(200, view.OkWithData("", articleView))
 }
