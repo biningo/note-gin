@@ -37,18 +37,24 @@ func (this Folder) GetFolderByID() {
 	return
 }
 
-func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article) {
-	fds, fdsCount := this.GetSubFolder(page, config.PageSize)
+func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
+	total2 := 0
+	total1 := 0
+	fds, total1 = this.GetSubFolder(page, config.PageSize)
+
+	fdsCount := len(fds)
 	if fdsCount < config.PageSize && fdsCount > 0 {
 
 		//page=page-(this.CountSubFolder()/config.PageSize)  page-1=0
-		articles, _ = this.GetSubArticle(config.PageSize-fdsCount, 0)
+		articles, total2 = this.GetSubArticle(config.PageSize-fdsCount, 0)
 
 	} else if fdsCount == 0 {
 		offset := config.PageSize - (this.CountSubFolder() % config.PageSize)
 		page = page - ((this.CountSubFolder() / config.PageSize) + 1)
-		articles, _ = this.GetSubArticle(config.PageSize, offset+(page-1)*config.PageSize)
+		articles, total2 = this.GetSubArticle(config.PageSize, offset+(page-1)*config.PageSize)
+
 	}
+	total = total1 + total2
 	return
 }
 
@@ -56,12 +62,14 @@ func (this Folder) GetSubFolderNoPage() (folders []Folder) {
 	db.Where("folder_id=?", this.ID).Find(&folders)
 	return
 }
-func (this Folder) GetSubFolder(page, PageSize int) (fds []Folder, count int) {
-	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.ID).Count(&count)
+func (this Folder) GetSubFolder(page, PageSize int) (fds []Folder, total int) {
+	db.Table("folder").Where("folder_id=?", this.ID).Count(&total)
+	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.ID)
 	return
 }
-func (this Folder) GetSubArticle(limit, offset int) (articles []Article, count int) {
-	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Find(&articles, "folder_id=?", this.ID).Find(&count)
+func (this Folder) GetSubArticle(limit, offset int) (articles []Article, total int) {
+	db.Table("article").Where("deleted=?", 0).Where("folder_id=?", this.ID).Count(&total)
+	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Find(&articles, "folder_id=?", this.ID)
 	return
 }
 

@@ -8,6 +8,13 @@ import (
 	"note-gin/view"
 )
 
+func GetCurrentFolder(c *gin.Context) {
+	nav := RedisClient.GetCurrentFolder()
+	nav = append(nav, "Home")
+
+	c.JSON(200, view.OkWithData("", nav))
+}
+
 func GetSubFile(c *gin.Context) {
 	pageStr := c.Param("page")
 	folder := model.Folder{}
@@ -23,13 +30,15 @@ func GetSubFile(c *gin.Context) {
 	if folder.ID == 0 && folder.Title != "Home" {
 		folder = folder.GetFolderByTitle(folder.Title)
 	}
-	folders, articles := folder.GetSubFile(pageNum)
+	folders, articles, total := folder.GetSubFile(pageNum)
 
 	resp := view.FileList{
 		Folders:  folders,
 		Articles: articles,
 		Nav:      nav,
+		Total:    total,
 	}
+
 	c.JSON(200, resp)
 }
 
