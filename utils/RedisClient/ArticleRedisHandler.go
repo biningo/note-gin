@@ -20,3 +20,8 @@ func SaveTempEdit(temp view.ArticleView) {
 	s, _ := json.Marshal(temp)
 	client.Set("temp_edit", s, time.Hour*24*15) //15天
 }
+func DeleteTempEdit() {
+	RedisInit()
+	client := RedisClient
+	client.Del("temp_edit")
+}

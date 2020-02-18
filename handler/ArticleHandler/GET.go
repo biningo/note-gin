@@ -58,3 +58,7 @@ func TempEditGet(c *gin.Context) {
 	RedisClient.GetTempEdit(&article_view)
 	c.JSON(200, view.OkWithData("", article_view))
 }
+func TempEditDelete(c *gin.Context) {
+	RedisClient.DeleteTempEdit()
+	c.JSON(200, view.OkWithMsg("清除成功!"))
+}

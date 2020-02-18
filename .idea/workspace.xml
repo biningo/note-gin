@@ -4,16 +4,8 @@
     <list default="true" id="69e80063-3e0f-4ccf-819d-8bb04da3e50b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/ArticleHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/ArticleHandler/GET.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/GET.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/TimeLineHandler/DELETE.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/TimeLineHandler/DELETE.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/TimeLineHandler/PUT.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/TimeLineHandler/PUT.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/TimeLine.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/TimeLine.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/ArticleRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/FolderRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/FolderRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/TimeLineRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/TimeLineRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/RedisClient/FolderNav.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/RedisClient/FolderNav.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/ArticleView.go" beforeDir="false" afterPath="$PROJECT_DIR$/view/ArticleView.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/RedisClient/ArticleRedisHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/RedisClient/ArticleRedisHandler.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +153,8 @@
     <MESSAGE value="取消tag" />
     <MESSAGE value="完成时间轴日记模块以及分页" />
     <MESSAGE value="完成文章分页以及目录状态保持" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成文章分页以及目录状态保持" />
+    <MESSAGE value="增加redis暂存文章 时间轴的CRUD" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加redis暂存文章 时间轴的CRUD" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -172,34 +165,34 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="500" y="241" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1580638793850" />
-    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1581928083772">
+    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1582009488068">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1581928083772" />
+    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582009488068" />
     <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1582008606996">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1582008606996" />
-    <state width="1493" height="254" key="GridCell.Tab.0.bottom" timestamp="1582009136097">
+    <state width="1493" height="254" key="GridCell.Tab.0.bottom" timestamp="1582038801068">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582009136097" />
-    <state width="1493" height="254" key="GridCell.Tab.0.center" timestamp="1582009136097">
+    <state width="1493" height="254" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582038801068" />
+    <state width="1493" height="254" key="GridCell.Tab.0.center" timestamp="1582038801068">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582009136097" />
-    <state width="1493" height="254" key="GridCell.Tab.0.left" timestamp="1582009136097">
+    <state width="1493" height="254" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582038801068" />
+    <state width="1493" height="254" key="GridCell.Tab.0.left" timestamp="1582038801068">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582009136097" />
-    <state width="1493" height="254" key="GridCell.Tab.0.right" timestamp="1582009136097">
+    <state width="1493" height="254" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582038801068" />
+    <state width="1493" height="254" key="GridCell.Tab.0.right" timestamp="1582038801068">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582009136097" />
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1581928086516">
+    <state width="1493" height="254" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582038801068" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582009490797">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1581928086516" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1582009490797" />
     <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581923393704">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
