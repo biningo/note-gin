@@ -9,7 +9,7 @@ import (
 
 func Delete(c *gin.Context) {
 	time_line := model.TimeLine{}
-	err := c.ShouldBind(time_line)
+	err := c.ShouldBind(&time_line)
 	utils.ErrReport(err)
 
 	time_line.Delete()

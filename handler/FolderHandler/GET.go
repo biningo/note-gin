@@ -8,8 +8,8 @@ import (
 	"note-gin/view"
 )
 
-func GetCurrentFolder(c *gin.Context) {
-	nav := RedisClient.GetCurrentFolder()
+func GetCurrentNav(c *gin.Context) {
+	nav := RedisClient.GetCurrentNav()
 	nav = append(nav, "Home")
 
 	c.JSON(200, view.OkWithData("", nav))

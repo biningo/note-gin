@@ -59,10 +59,5 @@ func Change(arr *[]int) {
 }
 
 func TestArr(t *testing.T) {
-	arr := []int{1, 2}
-	Change(&arr)
-	log.Println(arr)
-	arr = []int{1, 2, 3, 4, 5}
-	log.Println(arr[1:len(arr)])
-	log.Println(arr[1:])
+	log.Println(14 / 2)
 }

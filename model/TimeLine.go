@@ -24,3 +24,8 @@ func (this *TimeLine) Add() {
 func (this *TimeLine) Delete() {
 	db.Delete(this)
 }
+
+func (this *TimeLine) Update() {
+	this.CreatedAt = time.Now()
+	db.Model(&TimeLine{}).Where("id=?", this.ID).Update("created_at", this.CreatedAt).Update("mk_value", this.MkValue)
+}

@@ -39,7 +39,7 @@ func ChangeFolderNav(folder model.Folder) (nav []string) {
 	return
 }
 
-func GetCurrentFolder() (nav []string) {
+func GetCurrentNav() (nav []string) {
 	RedisInit()
 	client := RedisClient
 	length := client.LLen("folder_nav").Val()
