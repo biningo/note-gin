@@ -2,20 +2,49 @@ package ArticleHandler
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/utils/RedisClient"
 	"note-gin/view"
 )
 
+func DeleteAll(c *gin.Context) {
+	ids := c.QueryArray("items[]")
+	log.Println(ids)
+	model.Article{}.DeleteAll(ids)
+	c.JSON(200, view.OkWithMsg("删除成功!"))
+}
+
+func GetAllArticle(c *gin.Context) {
+	pageStr := c.Param("page")
+	page := utils.StrToInt(pageStr)
+	articles, total := model.Article{}.GetAll(page)
+
+	articleViews := make([]view.ArticleManageView, len(articles))
+
+	for index, v := range articles {
+		articleViews[index].ID = v.ID
+		articleViews[index].Title = v.Title
+		articleViews[index].UpdatedAt = v.UpdatedAt.Format("2006/1/2")
+	}
+
+	c.JSON(200, view.DataList{
+		Items: articleViews,
+		Total: int64(total),
+	})
+}
+
 func GetArticleInfo(c *gin.Context) {
+	id := c.Param("id")
 	article := model.Article{}
-	err := c.ShouldBind(&article)
-	utils.ErrReport(err)
-
+	article.ID = int64(utils.StrToInt(id))
 	article.GetArticleInfo()
-
-	c.JSON(200, view.OkWithData("", article))
+	c.JSON(200, gin.H{
+		"mkValue": article.MkValue,
+		"title":   article.Title,
+		"id":      article.ID,
+	})
 
 }
 

@@ -17,20 +17,22 @@ func GetCurrentNav(c *gin.Context) {
 
 func GetSubFile(c *gin.Context) {
 	pageStr := c.Param("page")
+	pageNum := utils.StrToInt(pageStr)
+
 	folder := model.Folder{}
 	err := c.ShouldBindQuery(&folder)
 	utils.ErrReport(err)
 
 	//导航
-
-	nav := RedisClient.ChangeFolderNav(folder)
-	nav = append(nav, "Home")
-
-	pageNum := utils.StrToInt(pageStr)
-	if folder.ID == 0 && folder.Title != "Home" {
+	var nav []string
+	if pageNum == 1 { //page=1才可能是其他目录
+		nav = RedisClient.ChangeFolderNav(folder)
+		nav = append(nav, "Home")
+	}
+	if folder.ID == 0 && folder.Title != "Home" { //不是根目录的话就先根据要跳转的目录名select到目录
 		folder = folder.GetFolderByTitle(folder.Title)
 	}
-	folders, articles, total := folder.GetSubFile(pageNum)
+	folders, articles, total := folder.GetSubFile(pageNum) //根据页码查找这个目录下的全部文件
 
 	resp := view.FileList{
 		Folders:  folders,

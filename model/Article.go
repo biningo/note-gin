@@ -15,8 +15,14 @@ type Article struct {
 
 //Find
 
-func (this Article) GetArticleInfo() {
-	db.Where(this).First(&this)
+func (this Article) GetAll(page int) (articles []Article, total int) {
+	db.Table("article").Where("deleted=?", 0).Count(&total)
+	db.Table("article").Order("updated_at desc").Offset((page-1)*20).Limit(20).Find(&articles, "deleted=?", 0)
+	return
+}
+
+func (this *Article) GetArticleInfo() {
+	db.Where("id=?", this.ID).First(&this)
 }
 func (this Article) GetDeletedArticle() (articles []Article) {
 	db.Find(&articles, "deleted=?", 1)
@@ -42,6 +48,9 @@ func (this Article) Delete() {
 	this.Deleted = true
 	this.DeletedTime = time.Now()
 	db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
+}
+func (this Article) DeleteAll(ids []string) {
+	db.Table("article").Where("id in (?)", ids).Delete(&this)
 }
 
 func (this Article) DeleteForever() {

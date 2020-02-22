@@ -15,5 +15,6 @@ func NewRouter() *gin.Engine {
 	ArticleRouter("article")
 	QiniuRouter("qiniu")
 	TimeLineRouter("/time_line")
+	MyRouter("/my")
 	return r
 }

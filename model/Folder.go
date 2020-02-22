@@ -38,23 +38,25 @@ func (this Folder) GetFolderByID() {
 }
 
 func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
-	total2 := 0
-	total1 := 0
-	fds, total1 = this.GetSubFolder(page, config.PageSize)
+
+	t1 := 0
+	t2 := 0
+	fds, t1 = this.GetSubFolder(page, config.PageSize)
 
 	fdsCount := len(fds)
 	if fdsCount < config.PageSize && fdsCount > 0 {
 
 		//page=page-(this.CountSubFolder()/config.PageSize)  page-1=0
-		articles, total2 = this.GetSubArticle(config.PageSize-fdsCount, 0)
+		articles, t2 = this.GetSubArticle(config.PageSize-fdsCount, 0)
 
 	} else if fdsCount == 0 {
 		offset := config.PageSize - (this.CountSubFolder() % config.PageSize)
 		page = page - ((this.CountSubFolder() / config.PageSize) + 1)
-		articles, total2 = this.GetSubArticle(config.PageSize, offset+(page-1)*config.PageSize)
+		articles, t2 = this.GetSubArticle(config.PageSize, offset+(page-1)*config.PageSize)
 
 	}
-	total = total1 + total2
+
+	total = t1 + t2
 	return
 }
 
@@ -63,12 +65,12 @@ func (this Folder) GetSubFolderNoPage() (folders []Folder) {
 	return
 }
 func (this Folder) GetSubFolder(page, PageSize int) (fds []Folder, total int) {
-	db.Table("folder").Where("folder_id=?", this.ID).Count(&total)
+	db.Table("folder").Where("folder_id=? and deleted=?", this.ID, 0).Count(&total)
 	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.ID)
 	return
 }
 func (this Folder) GetSubArticle(limit, offset int) (articles []Article, total int) {
-	db.Table("article").Where("deleted=?", 0).Where("folder_id=?", this.ID).Count(&total)
+	db.Table("article").Where("deleted=?", "folder_id=?", 0, this.ID).Count(&total)
 	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Find(&articles, "folder_id=?", this.ID)
 	return
 }
