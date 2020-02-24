@@ -1,25 +1,28 @@
 package ArticleHandler
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"io"
 	"log"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/utils/RedisClient"
 	"note-gin/view"
+	"strings"
 )
 
-func DeleteAll(c *gin.Context) {
+func DeleteMany(c *gin.Context) {
 	ids := c.QueryArray("items[]")
 	log.Println(ids)
-	model.Article{}.DeleteAll(ids)
+	model.Article{}.DeleteMany(ids)
 	c.JSON(200, view.OkWithMsg("删除成功!"))
 }
 
-func GetAllArticle(c *gin.Context) {
+func GetManyArticle(c *gin.Context) {
 	pageStr := c.Param("page")
 	page := utils.StrToInt(pageStr)
-	articles, total := model.Article{}.GetAll(page)
+	articles, total := model.Article{}.GetMany(page)
 
 	articleViews := make([]view.ArticleManageView, len(articles))
 
@@ -90,4 +93,16 @@ func TempEditGet(c *gin.Context) {
 func TempEditDelete(c *gin.Context) {
 	RedisClient.DeleteTempEdit()
 	c.JSON(200, view.OkWithMsg("清除成功!"))
+}
+
+func DownLoad(c *gin.Context) {
+	article := model.Article{}
+	article.ID = int64(utils.StrToInt(c.Param("id")))
+	article.GetArticleInfo()
+	filename := article.Title
+
+	//文件命名
+	c.Writer.Header().Add("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
+	c.Writer.Header().Add("Content-Type", "application/octet-stream")
+	io.Copy(c.Writer, strings.NewReader(article.MkValue))
 }

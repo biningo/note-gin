@@ -10,5 +10,7 @@ func migration(DB *gorm.DB) {
 	DB.AutoMigrate(&User{}).
 		AutoMigrate(&Folder{}).
 		AutoMigrate(&Article{}).
-		AutoMigrate(&TimeLine{})
+		AutoMigrate(&TimeLine{}).
+		AutoMigrate(&MyBook{}).
+		AutoMigrate(&MyMood{})
 }

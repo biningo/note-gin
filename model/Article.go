@@ -2,6 +2,7 @@ package model
 
 import (
 	"errors"
+
 	"log"
 	"time"
 )
@@ -15,7 +16,7 @@ type Article struct {
 
 //Find
 
-func (this Article) GetAll(page int) (articles []Article, total int) {
+func (this Article) GetMany(page int) (articles []Article, total int) {
 	db.Table("article").Where("deleted=?", 0).Count(&total)
 	db.Table("article").Order("updated_at desc").Offset((page-1)*20).Limit(20).Find(&articles, "deleted=?", 0)
 	return
@@ -49,7 +50,7 @@ func (this Article) Delete() {
 	this.DeletedTime = time.Now()
 	db.Where("id=?", this.ID).Assign(this).FirstOrCreate(&this)
 }
-func (this Article) DeleteAll(ids []string) {
+func (this Article) DeleteMany(ids []string) {
 	db.Table("article").Where("id in (?)", ids).Delete(&this)
 }
 

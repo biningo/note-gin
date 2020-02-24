@@ -7,10 +7,26 @@ const (
 )
 
 type MyBook struct {
-	ID      int64  `form:"id" json:"id"`
-	Title   string `form:"title" json:"title"`
-	Author  string `form:"author" json:"author"`
-	ImgURL  string `form:"img_url" json:"img_url"` //封面图片
-	Process int    `form:"process" json:"process"` //读书进度
-	Status  string `form:"status" json:"status"`
+	ID     int64  `form:"id" json:"id"`
+	Title  string `form:"title" json:"title"`
+	Writer string `form:"writer" json:"writer"`
+	ImgURL string `form:"img_url" json:"img_url"` //封面图片
+	Status string `form:"status" json:"status"`
+}
+
+func (this *MyBook) Add() {
+	db.Create(this)
+}
+
+func (this *MyBook) Delete() {
+	db.Delete(this, "id=?", this.ID)
+}
+
+func (this MyBook) GetAll() (books []MyBook) {
+	db.Table("my_book").Order("status").Find(&books)
+	return
+}
+
+func (this *MyBook) Save() {
+	db.Save(this)
 }

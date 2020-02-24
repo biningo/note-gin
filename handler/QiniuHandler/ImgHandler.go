@@ -51,7 +51,7 @@ func ImgUpload(c *gin.Context) {
 	}
 
 	url := "http://q5me94gos.bkt.clouddn.com/" + key
-	c.JSON(200, view.OkWithData("图片上传成功!", url))
+	c.JSON(200, view.OkWithData("云图片上传成功!", url))
 }
 
 func ImgDelete(c *gin.Context) {
