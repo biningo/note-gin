@@ -22,8 +22,8 @@ func DeleteMany(c *gin.Context) {
 func GetManyArticle(c *gin.Context) {
 	pageStr := c.Param("page")
 	page := utils.StrToInt(pageStr)
-	articles, total := model.Article{}.GetMany(page)
-
+	articles := model.Article{}.GetMany(page)
+	total := model.Article{}.Count()
 	articleViews := make([]view.ArticleManageView, len(articles))
 
 	for index, v := range articles {

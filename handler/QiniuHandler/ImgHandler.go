@@ -8,7 +8,6 @@ import (
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/storage"
 	"io/ioutil"
-	"log"
 	"note-gin/view"
 )
 
@@ -26,7 +25,6 @@ func ImgUpload(c *gin.Context) {
 	}
 	mac := qbox.NewMac(accessKey, secretKey)
 	upToken := putPolicy.UploadToken(mac)
-	log.Println(upToken)
 
 	cfg := storage.Config{}
 	// 空间对应的机房
@@ -42,16 +40,24 @@ func ImgUpload(c *gin.Context) {
 	key := fileUp.Filename
 	data := []byte{}
 
+	manager := storage.NewBucketManager(mac, &cfg)
+	FileInfo, err := manager.Stat(bucket, key)
+	if FileInfo.Fsize != 0 { //图片存在
+		url := "http://q5me94gos.bkt.clouddn.com/" + key
+		c.JSON(200, view.OkWithData("图片已经存在!", url))
+		return
+	}
+
 	data, _ = ioutil.ReadAll(file)
 	dataLen := int64(len(data))
-	err := resumeUploader.Put(context.Background(), &ret, upToken, key, bytes.NewReader(data), dataLen, &putExtra)
+	err = resumeUploader.Put(context.Background(), &ret, upToken, key, bytes.NewReader(data), dataLen, &putExtra)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
 	url := "http://q5me94gos.bkt.clouddn.com/" + key
-	c.JSON(200, view.OkWithData("云图片上传成功!", url))
+	c.JSON(200, view.OkWithData("图片上传成功!", url))
 }
 
 func ImgDelete(c *gin.Context) {

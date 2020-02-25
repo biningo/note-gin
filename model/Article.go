@@ -15,9 +15,13 @@ type Article struct {
 }
 
 //Find
-
-func (this Article) GetMany(page int) (articles []Article, total int) {
+func (this Article) Count() int {
+	total := 0
 	db.Table("article").Where("deleted=?", 0).Count(&total)
+	return total
+}
+func (this Article) GetMany(page int) (articles []Article) {
+
 	db.Table("article").Order("updated_at desc").Offset((page-1)*20).Limit(20).Find(&articles, "deleted=?", 0)
 	return
 }

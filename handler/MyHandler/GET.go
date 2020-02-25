@@ -4,12 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"note-gin/model"
 	"note-gin/utils"
+	"note-gin/utils/RedisClient"
 	"note-gin/view"
 )
 
 //Book
 func GetAllBook(c *gin.Context) {
-	books := model.MyBook{}.GetAll()
+
+	books := RedisClient.GetAllBook()
 	c.JSON(200, view.DataList{
 		Items: books,
 		Total: int64(len(books)),

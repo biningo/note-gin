@@ -4,19 +4,12 @@
     <list default="true" id="69e80063-3e0f-4ccf-819d-8bb04da3e50b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/ArticleHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/ArticleHandler/GET.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/MyHandler/DELETE.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/MyHandler/DELETE.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/MyHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/MyHandler/GET.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/MyHandler/PUT.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/MyHandler/PUT.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/QiniuHandler/ImgHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/QiniuHandler/ImgHandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/Article.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Article.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/MyBook.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/MyBook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/MyMood.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/MyMood.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/MyPhoto.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/migration.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/migration.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/ArticleRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/MyRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/MyRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/RedisClient/ArticleRedisHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/RedisClient/RedisHandlerArticle.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +160,8 @@
     <MESSAGE value="增加redis暂存文章 时间轴的CRUD" />
     <MESSAGE value="增加redis临时储存的删除请求" />
     <MESSAGE value="后台批量管理" />
-    <option name="LAST_COMMIT_MESSAGE" value="后台批量管理" />
+    <MESSAGE value="完成文章下载makedown模块和my模块，项目基本完工&#10;坐等bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成文章下载makedown模块和my模块，项目基本完工&#10;坐等bug" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -178,37 +172,37 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="500" y="241" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1582513957639" />
-    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1582373705141">
+    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1582521712568">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582373705141" />
+    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582521712568" />
     <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1582168373707">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1582168373707" />
-    <state width="1493" height="184" key="GridCell.Tab.0.bottom" timestamp="1582520856485">
+    <state width="1493" height="311" key="GridCell.Tab.0.bottom" timestamp="1582544725019">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="184" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582520856485" />
-    <state width="1493" height="184" key="GridCell.Tab.0.center" timestamp="1582520856485">
+    <state width="1493" height="311" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
+    <state width="1493" height="311" key="GridCell.Tab.0.center" timestamp="1582544725019">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="184" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582520856485" />
-    <state width="1493" height="184" key="GridCell.Tab.0.left" timestamp="1582520856485">
+    <state width="1493" height="311" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
+    <state width="1493" height="311" key="GridCell.Tab.0.left" timestamp="1582544725019">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="184" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582520856485" />
-    <state width="1493" height="184" key="GridCell.Tab.0.right" timestamp="1582520856485">
+    <state width="1493" height="311" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
+    <state width="1493" height="311" key="GridCell.Tab.0.right" timestamp="1582544725019">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="184" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582520856485" />
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582373707678">
+    <state width="1493" height="311" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582521715640">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1582373707678" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1582427946095">
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1582521715640" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1582534395120">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1582427946095" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1582534395120" />
   </component>
 </project>

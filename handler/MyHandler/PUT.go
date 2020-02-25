@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"note-gin/model"
 	"note-gin/utils"
+	"note-gin/utils/RedisClient"
 	"note-gin/view"
 )
 
@@ -20,6 +21,7 @@ func AddBook(c *gin.Context) {
 	err := c.ShouldBind(&book)
 	utils.ErrReport(err)
 	book.Add()
+	RedisClient.AddBook(book) //缓存
 	c.JSON(200, view.OkWithData("添加成功!", book))
 }
 
@@ -28,5 +30,6 @@ func Update(c *gin.Context) {
 	err := c.ShouldBind(&book)
 	utils.ErrReport(err)
 	book.Save()
+	RedisClient.AddBook(book)
 	c.JSON(200, view.OkWithMsg("修改成功!"))
 }
