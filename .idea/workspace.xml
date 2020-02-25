@@ -3,13 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="69e80063-3e0f-4ccf-819d-8bb04da3e50b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/ArticleHandler/DELETE.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/ArticleHandler/DELETE.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/ArticleHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/ArticleHandler/GET.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/ArticleHandler/PUT.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/ArticleHandler/PUT.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/DELETE.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/DELETE.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/GET.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/FolderHandler/PUT.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/FolderHandler/PUT.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/MyHandler/GET.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/MyHandler/GET.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/MyHandler/PUT.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/MyHandler/PUT.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/QiniuHandler/ImgHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/QiniuHandler/ImgHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/QiniuHandler/QiniuToken.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/QiniuHandler/QiniuToken.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/Article.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/MyBook.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/MyBook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/RedisClient/ArticleRedisHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/RedisClient/RedisHandlerArticle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Folder.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Folder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/ArticleSerialize.go" beforeDir="false" afterPath="$PROJECT_DIR$/view/ArticleSerialize.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/QiniuClient/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/QiniuClient/1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/QiniuClient/QiniuClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/QiniuClient/QiniuClient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/RedisClient/FolderNav.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/RedisClient/FolderNav.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/RedisClient/RedisClient.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/RedisClient/Init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/RedisClient/RedisHandlerArticle.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/RedisClient/RedisHandlerArticle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/RedisClient/RedisHandlerMyBook.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/RedisClient/RedisHandlerMyBook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/ArticleManageView.go" beforeDir="false" afterPath="$PROJECT_DIR$/view/ArticleManageView.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/FileList.go" beforeDir="false" afterPath="$PROJECT_DIR$/view/FileList.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,14 +67,16 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Go_Code\note-gin\utils\RedisClient" />
-      <recent name="D:\Go_Code\note-gin\model" />
-      <recent name="D:\Go_Code\note-gin\view" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Go_Code\note-gin\utils\QiniuClient" />
       <recent name="D:\Go_Code\note-gin\utils" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Go_Code\note-gin\Interface\CacheCount" />
+      <recent name="D:\Go_Code\note-gin\view" />
+      <recent name="D:\Go_Code\note-gin\Interface" />
+      <recent name="D:\Go_Code\note-gin\middleware\RedisClient\Impl" />
+      <recent name="D:\Go_Code\note-gin\middleware\RedisClient" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build note-gin">
@@ -71,17 +87,6 @@
       <filePath value="$PROJECT_DIR$/main.go" />
       <package value="note-gin" />
       <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestAA in note-gin/test (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="note-gin" />
-      <working_directory value="$PROJECT_DIR$/test" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="note-gin/test" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestAA$" />
       <method v="2" />
     </configuration>
     <configuration name="TestArr in note-gin/test (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -106,6 +111,17 @@
       <pattern value="^TestArr$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestArr in note-gin/test (3)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="note-gin" />
+      <working_directory value="$PROJECT_DIR$/test" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="note-gin/test" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestArr$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestArr in note-gin/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="note-gin" />
       <working_directory value="$PROJECT_DIR$/test" />
@@ -120,10 +136,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build note-gin" />
+        <item itemvalue="Go Test.TestArr in note-gin/test (3)" />
         <item itemvalue="Go Test.TestArr in note-gin/test (2)" />
         <item itemvalue="Go Test.TestArr in note-gin/test (1)" />
         <item itemvalue="Go Test.TestArr in note-gin/test" />
-        <item itemvalue="Go Test.TestAA in note-gin/test (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +177,8 @@
     <MESSAGE value="增加redis临时储存的删除请求" />
     <MESSAGE value="后台批量管理" />
     <MESSAGE value="完成文章下载makedown模块和my模块，项目基本完工&#10;坐等bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成文章下载makedown模块和my模块，项目基本完工&#10;坐等bug" />
+    <MESSAGE value="添加Book的 Redis缓存" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加Book的 Redis缓存" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -172,37 +189,41 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="500" y="241" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1582513957639" />
-    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1582521712568">
+    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1582601950528">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582521712568" />
+    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582601950527" />
     <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1582168373707">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1582168373707" />
-    <state width="1493" height="311" key="GridCell.Tab.0.bottom" timestamp="1582544725019">
+    <state width="1493" height="195" key="GridCell.Tab.0.bottom" timestamp="1582626823999">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="311" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
-    <state width="1493" height="311" key="GridCell.Tab.0.center" timestamp="1582544725019">
+    <state width="1493" height="195" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582626823999" />
+    <state width="1493" height="195" key="GridCell.Tab.0.center" timestamp="1582626823999">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="311" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
-    <state width="1493" height="311" key="GridCell.Tab.0.left" timestamp="1582544725019">
+    <state width="1493" height="195" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582626823999" />
+    <state width="1493" height="195" key="GridCell.Tab.0.left" timestamp="1582626823999">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="311" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
-    <state width="1493" height="311" key="GridCell.Tab.0.right" timestamp="1582544725019">
+    <state width="1493" height="195" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582626823999" />
+    <state width="1493" height="195" key="GridCell.Tab.0.right" timestamp="1582626823999">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="311" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582544725019" />
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582521715640">
+    <state width="1493" height="195" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582626823999" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582601953240">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1582521715640" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1582534395120">
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1582601953240" />
+    <state x="390" y="21" width="755" height="822" key="find.popup" timestamp="1582625740827">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1582534395120" />
+    <state x="390" y="21" width="755" height="822" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1582625740827" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1582604871685">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1582604871685" />
   </component>
 </project>

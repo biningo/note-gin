@@ -2,9 +2,10 @@ package FolderHandler
 
 import (
 	"github.com/gin-gonic/gin"
+	"note-gin/Interface/CacheCount"
+	"note-gin/middleware/RedisClient"
 	"note-gin/model"
 	"note-gin/utils"
-	"note-gin/utils/RedisClient"
 	"note-gin/view"
 )
 
@@ -32,11 +33,18 @@ func GetSubFile(c *gin.Context) {
 	if folder.ID == 0 && folder.Title != "Home" { //不是根目录的话就先根据要跳转的目录名select到目录
 		folder = folder.GetFolderByTitle(folder.Title)
 	}
-	folders, articles, total := folder.GetSubFile(pageNum) //根据页码查找这个目录下的全部文件
+	folders, articles, total := folder.GetSubFile(pageNum, CacheCount.CacheCountImpl{}) //根据页码查找这个目录下的全部文件 total redis缓存
+
+	manyArticles := make([]view.ArticleManageView, len(articles))
+	for i, v := range articles {
+		manyArticles[i].ID = v.ID
+		manyArticles[i].Title = v.Title
+		manyArticles[i].UpdatedAt = v.UpdatedAt.Format("2006-01-02")
+	}
 
 	resp := view.FileList{
 		Folders:  folders,
-		Articles: articles,
+		Articles: manyArticles,
 		Nav:      nav,
 		Total:    total,
 	}

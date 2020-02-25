@@ -1,11 +1,10 @@
-package utils
+package view
 
 import (
 	"note-gin/model"
-	"note-gin/view"
 )
 
-func ArticleSerialize(article model.Article) (articleView view.ArticleView) {
+func ArticleSerialize(article model.Article) (articleView ArticleView) {
 
 	articleView.ID = article.ID
 	articleView.CreatedAt = article.CreatedAt.Format("2006-01-02")

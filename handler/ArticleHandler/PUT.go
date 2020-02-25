@@ -2,6 +2,7 @@ package ArticleHandler
 
 import (
 	"github.com/gin-gonic/gin"
+	"note-gin/Interface/CacheCount"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/view"
@@ -22,7 +23,7 @@ func Add(c *gin.Context) {
 
 	article.Add() //这里调用的方法必须是指针类型
 
-	articleView = utils.ArticleSerialize(article)
+	articleView = view.ArticleSerialize(article)
 	//目录路径回溯
 	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)  //先添加自己的根目录
 	model.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
@@ -41,7 +42,7 @@ func Update(c *gin.Context) {
 	article.FolderID = articleView.DirPath[len(articleView.DirPath)-1]
 	article.MkValue = articleView.MkValue
 	article.Title = articleView.Title
-	article.Update()
+	article.Update(CacheCount.CacheCountImpl{})
 
 	articleView.UpdatedAt = article.UpdatedAt.Format("2006-01-02")
 	articleView.CreatedAt = article.UpdatedAt.Format("2006-01-02")
@@ -50,10 +51,11 @@ func Update(c *gin.Context) {
 
 }
 func Edit(c *gin.Context) {
-	article := model.Article{}
-	err := c.ShouldBindJSON(&article)
+	articleManyView := view.ArticleManageView{}
+	err := c.ShouldBind(&articleManyView)
 	utils.ErrReport(err)
-	articleView := utils.ArticleSerialize(article)
+	article := articleManyView.ToArticle()
+	articleView := view.ArticleSerialize(article)
 	//目录路径回溯
 	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)  //先添加自己的根目录
 	model.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径

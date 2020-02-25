@@ -2,6 +2,7 @@ package FolderHandler
 
 import (
 	"github.com/gin-gonic/gin"
+	"note-gin/Interface/CacheCount"
 	"note-gin/model"
 	"note-gin/utils"
 	"note-gin/view"
@@ -13,7 +14,7 @@ func Add(c *gin.Context) {
 	FolderTitle := c.Query("FolderTitle")
 
 	folder.FolderID = model.Folder{}.GetFolderByTitle(FolderTitle).ID
-	folder.Add()
+	folder.Add(CacheCount.CacheCountImpl{})
 
 	c.JSON(200, view.OkWithData("目录创建成功！", folder))
 

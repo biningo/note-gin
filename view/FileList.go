@@ -4,7 +4,7 @@ import "note-gin/model"
 
 type FileList struct {
 	Folders  []model.Folder
-	Articles []model.Article
+	Articles []ArticleManageView
 	Nav      []string
 	Total    int
 }

@@ -4,7 +4,7 @@ import (
 	"container/list"
 	"fmt"
 	"log"
-	"note-gin/utils/RedisClient"
+	"note-gin/middleware/RedisClient"
 	"testing"
 	"time"
 )

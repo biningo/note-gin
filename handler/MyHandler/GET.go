@@ -2,9 +2,9 @@ package MyHandler
 
 import (
 	"github.com/gin-gonic/gin"
+	"note-gin/middleware/RedisClient"
 	"note-gin/model"
 	"note-gin/utils"
-	"note-gin/utils/RedisClient"
 	"note-gin/view"
 )
 

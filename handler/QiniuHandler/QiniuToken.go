@@ -2,7 +2,7 @@ package QiniuHandler
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/utils/QiniuClient"
+	"note-gin/middleware/QiniuClient"
 )
 
 func QiniuToken(c *gin.Context) {

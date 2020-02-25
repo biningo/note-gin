@@ -5,8 +5,7 @@ import (
 )
 
 func ChangeFolderNav(folder model.Folder) (nav []string) {
-	RedisInit()
-	client := RedisClient
+	client := RedisInit()
 	if folder.Title == "Home" {
 		client.Del("folder_nav")
 		return
@@ -42,8 +41,8 @@ func ChangeFolderNav(folder model.Folder) (nav []string) {
 }
 
 func GetCurrentNav() (nav []string) {
-	RedisInit()
-	client := RedisClient
+	client := RedisInit()
+
 	length := client.LLen("folder_nav").Val()
 	if length > 0 {
 		nav = client.LRange("folder_nav", 0, length-1).Val()

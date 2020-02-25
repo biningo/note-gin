@@ -5,9 +5,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"log"
+	"note-gin/Interface/CacheCount"
+	"note-gin/middleware/RedisClient"
 	"note-gin/model"
 	"note-gin/utils"
-	"note-gin/utils/RedisClient"
 	"note-gin/view"
 	"strings"
 )
@@ -15,7 +16,7 @@ import (
 func DeleteMany(c *gin.Context) {
 	ids := c.QueryArray("items[]")
 	log.Println(ids)
-	model.Article{}.DeleteMany(ids)
+	model.Article{}.DeleteMany(ids, CacheCount.CacheCountImpl{})
 	c.JSON(200, view.OkWithMsg("删除成功!"))
 }
 
@@ -66,7 +67,7 @@ func Recover(c *gin.Context) {
 	err := c.ShouldBind(&article)
 	utils.ErrReport(err)
 
-	ok := article.Recover()
+	ok := article.Recover(CacheCount.CacheCountImpl{})
 	if ok != nil {
 		c.JSON(200, view.ErrorWithMsg(ok.Error()))
 	} else {
