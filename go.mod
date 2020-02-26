@@ -1,5 +1,4 @@
 module note-gin
-
 go 1.13
 
 require (
@@ -11,3 +10,5 @@ require (
 	github.com/onsi/gomega v1.9.0 // indirect
 	github.com/qiniu/api.v7/v7 v7.4.1
 )
+
+
