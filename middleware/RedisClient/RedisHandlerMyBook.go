@@ -14,17 +14,30 @@ func AddBook(book model.MyBook) {
 func GetAllBook() []model.MyBook {
 	client := RedisInit()
 	m := client.HGetAll("my_book").Val()
-	books := make([]model.MyBook, len(m))
-	book := model.MyBook{}
 
-	c := 0
-	for _, v := range m {
-		json.Unmarshal([]byte(v), &book)
-		books[c] = book
-		c++
+	//
+	IsExist := client.Exists("my_book").Val()
+	//
+	if IsExist == 0 {
+		books := model.MyBook{}.GetAll()
+		for _, v := range books {
+			bStr, _ := json.Marshal(v)
+			client.HSetNX("my_book", string(v.ID), bStr)
+		}
+		return books
+	} else {
+		books := make([]model.MyBook, len(m))
+		book := model.MyBook{}
+
+		c := 0
+		for _, v := range m {
+			json.Unmarshal([]byte(v), &book)
+			books[c] = book
+			c++
+		}
+		return books
 	}
 
-	return books
 }
 
 func DeleteBook(id int) {
