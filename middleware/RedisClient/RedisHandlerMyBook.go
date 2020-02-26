@@ -8,7 +8,7 @@ import (
 func AddBook(book model.MyBook) {
 	client := RedisInit()
 	bookStr, _ := json.Marshal(book)
-	client.HSetNX("my_book", string(book.ID), bookStr)
+	client.HSet("my_book", string(book.ID), bookStr)
 }
 
 func GetAllBook() []model.MyBook {

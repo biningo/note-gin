@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69e80063-3e0f-4ccf-819d-8bb04da3e50b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/build.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/middleware/Cors.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/MyHandler/DELETE.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/MyHandler/DELETE.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/RedisClient/Init.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/RedisClient/Init.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/RedisClient/RedisHandlerMyBook.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/RedisClient/RedisHandlerMyBook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/MyRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/MyRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/MyMood.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/MyMood.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +63,7 @@
       <recent name="D:\Go_Code\note-gin\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build note-gin (1)">
+  <component name="RunManager" selected="Go Build.go build note-gin">
     <configuration name="go build note-gin (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="note-gin" />
       <working_directory value="$PROJECT_DIR$" />
@@ -122,8 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build note-gin (1)" />
         <item itemvalue="Go Build.go build note-gin" />
+        <item itemvalue="Go Build.go build note-gin (1)" />
         <item itemvalue="Go Test.TestArr in note-gin/test (3)" />
         <item itemvalue="Go Test.TestArr in note-gin/test (2)" />
         <item itemvalue="Go Test.TestArr in note-gin/test (1)" />
@@ -166,7 +161,8 @@
     <MESSAGE value="完成文章下载makedown模块和my模块，项目基本完工&#10;坐等bug" />
     <MESSAGE value="添加Book的 Redis缓存" />
     <MESSAGE value="添加文章总数的缓存 解决包的循环引用问题在interface下建立接口 传递接口操作" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加文章总数的缓存 解决包的循环引用问题在interface下建立接口 传递接口操作" />
+    <MESSAGE value="完成项目部署⚽  Over!!大概这就是成就感吧！✨" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成项目部署⚽  Over!!大概这就是成就感吧！✨" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -185,34 +181,34 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="484" y="92" key="#go_build_note-gin_(1)/0.0.1536.864@0.0.1536.864" timestamp="1582642643272" />
-    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1582627083535">
+    <state x="385" y="27" key="CommitChangelistDialog2" timestamp="1582715885886">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582627083535" />
+    <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582715885886" />
     <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1582644633753">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1582644633753" />
-    <state width="1478" height="101" key="GridCell.Tab.0.bottom" timestamp="1582681833467">
+    <state width="1478" height="185" key="GridCell.Tab.0.bottom" timestamp="1582715228981">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="101" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582681833467" />
-    <state width="1478" height="101" key="GridCell.Tab.0.center" timestamp="1582681833466">
+    <state width="1478" height="185" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582715228981" />
+    <state width="1478" height="185" key="GridCell.Tab.0.center" timestamp="1582715228981">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="101" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582681833466" />
-    <state width="1478" height="101" key="GridCell.Tab.0.left" timestamp="1582681833466">
+    <state width="1478" height="185" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582715228981" />
+    <state width="1478" height="185" key="GridCell.Tab.0.left" timestamp="1582715228981">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="101" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582681833466" />
-    <state width="1478" height="101" key="GridCell.Tab.0.right" timestamp="1582681833466">
+    <state width="1478" height="185" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582715228981" />
+    <state width="1478" height="185" key="GridCell.Tab.0.right" timestamp="1582715228981">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="101" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582681833466" />
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582627086308">
+    <state width="1478" height="185" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582715228981" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582682560459">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1582627086308" />
+    <state x="361" y="169" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1582682560459" />
     <state x="390" y="21" width="755" height="822" key="find.popup" timestamp="1582625740827">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

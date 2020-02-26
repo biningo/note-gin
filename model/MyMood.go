@@ -18,7 +18,7 @@ type MyMood struct {
 }
 
 func (this MyMood) GetMany(page int) (moods []MyMood, total int) {
-	db.Offset((page - 1) * 10).Limit(10).Order("created_at desc").Find(&moods)
+	db.Offset((page - 1) * 14).Limit(14).Order("created_at desc").Find(&moods)
 	db.Table("my_mood").Count(&total)
 	return
 }
