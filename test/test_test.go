@@ -3,6 +3,7 @@ package test
 import (
 	"container/list"
 	"fmt"
+	"github.com/robfig/cron"
 	"log"
 	"note-gin/middleware/RedisClient"
 	"testing"
@@ -39,8 +40,7 @@ func TestSub(t *testing.T) {
 
 func TestRedis(t *testing.T) {
 	RedisClient.RedisInit()
-	length := RedisClient.RedisClient.LLen("folder_nav").Val()
-	fmt.Println(length)
+
 }
 
 func TestAA(t *testing.T) {
@@ -59,5 +59,13 @@ func Change(arr *[]int) {
 }
 
 func TestArr(t *testing.T) {
+	s := fmt.Sprintf("【%s】:%s", "abc", "httpp")
+	c := cron.New()
+	err := c.AddFunc("*/5 * * * * ?", func() {
+		log.Println(s)
+	})
+	c.Start()
 
+	log.Println(err)
+	time.Sleep(time.Hour)
 }

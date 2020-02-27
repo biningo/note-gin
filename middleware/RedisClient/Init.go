@@ -4,9 +4,9 @@ import "github.com/go-redis/redis"
 
 func RedisInit() *redis.Client {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "118.178.180.115:6379",
+		Addr:     "",
 		DB:       1,
-		Password: "biningo",
+		Password: "",
 	})
 
 	return client

@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="69e80063-3e0f-4ccf-819d-8bb04da3e50b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,20 +50,20 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Go_Code\note-gin\static" />
-      <recent name="D:\Go_Code\note-gin\static\dist\img" />
-      <recent name="D:\Go_Code\note-gin\Interface\CacheCount" />
-      <recent name="D:\Go_Code\note-gin\view" />
-      <recent name="D:\Go_Code\note-gin\Interface" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Go_Code\note-gin\static" />
       <recent name="D:\Go_Code\note-gin\utils\QiniuClient" />
       <recent name="D:\Go_Code\note-gin\utils" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Go_Code\note-gin\handler\middleware" />
+      <recent name="D:\Go_Code\note-gin\utils" />
+      <recent name="D:\Go_Code\note-gin\static" />
+      <recent name="D:\Go_Code\note-gin\static\dist\img" />
+      <recent name="D:\Go_Code\note-gin\Interface\CacheCount" />
+    </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build note-gin">
+  <component name="RunManager" selected="Go Build.go build note-gin (1)">
     <configuration name="go build note-gin (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="note-gin" />
       <working_directory value="$PROJECT_DIR$" />
@@ -89,7 +93,7 @@
       <pattern value="^TestArr$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestArr in note-gin/test (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestArr in note-gin/test (3)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="note-gin" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -100,7 +104,7 @@
       <pattern value="^TestArr$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestArr in note-gin/test (3)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestArr in note-gin/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="note-gin" />
       <working_directory value="$PROJECT_DIR$/test" />
       <framework value="gotest" />
@@ -113,11 +117,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build note-gin" />
         <item itemvalue="Go Build.go build note-gin (1)" />
-        <item itemvalue="Go Test.TestArr in note-gin/test (3)" />
-        <item itemvalue="Go Test.TestArr in note-gin/test (2)" />
+        <item itemvalue="Go Build.go build note-gin" />
         <item itemvalue="Go Test.TestArr in note-gin/test (1)" />
+        <item itemvalue="Go Test.TestArr in note-gin/test" />
+        <item itemvalue="Go Test.TestArr in note-gin/test (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -182,26 +186,26 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="385" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1582715933300" />
-    <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1582644633753">
+    <state x="549" y="191" key="FileChooserDialogImpl" timestamp="1582783483479">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1582644633753" />
-    <state width="1478" height="185" key="GridCell.Tab.0.bottom" timestamp="1582715960359">
+    <state x="549" y="191" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1582783483479" />
+    <state width="1493" height="182" key="GridCell.Tab.0.bottom" timestamp="1582784082413">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="185" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582715960359" />
-    <state width="1478" height="185" key="GridCell.Tab.0.center" timestamp="1582715960359">
+    <state width="1493" height="182" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1582784082413" />
+    <state width="1493" height="182" key="GridCell.Tab.0.center" timestamp="1582784082413">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="185" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582715960359" />
-    <state width="1478" height="185" key="GridCell.Tab.0.left" timestamp="1582715960359">
+    <state width="1493" height="182" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1582784082413" />
+    <state width="1493" height="182" key="GridCell.Tab.0.left" timestamp="1582784082413">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="185" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582715960359" />
-    <state width="1478" height="185" key="GridCell.Tab.0.right" timestamp="1582715960359">
+    <state width="1493" height="182" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1582784082413" />
+    <state width="1493" height="182" key="GridCell.Tab.0.right" timestamp="1582784082413">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1478" height="185" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582715960359" />
+    <state width="1493" height="182" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1582784082413" />
     <state x="361" y="169" key="Vcs.Push.Dialog.v2" timestamp="1582715942790">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -210,9 +214,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="390" y="21" width="755" height="822" key="find.popup/0.0.1536.864@0.0.1536.864" timestamp="1582625740827" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1582681636386">
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1582782216257">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1582681636386" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1582782216257" />
   </component>
 </project>
