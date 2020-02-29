@@ -8,6 +8,7 @@ import (
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/storage"
 	"io/ioutil"
+	"log"
 	"note-gin/view"
 )
 
@@ -57,6 +58,7 @@ func ImgUpload(c *gin.Context) {
 	}
 
 	url := "http://q5me94gos.bkt.clouddn.com/" + key
+	log.Println("上传图片：", url)
 	c.JSON(200, view.OkWithData("图片上传成功!", url))
 }
 

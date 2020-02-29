@@ -14,4 +14,5 @@ func MyRouter(base string) {
 	r.GET("/mood/delete/many", MyHandler.DeleteManyMood)
 	r.POST("/mood/add", MyHandler.AddMood)
 
+	r.GET("/record", MyHandler.GetAccessRecord)
 }

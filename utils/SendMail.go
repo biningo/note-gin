@@ -7,7 +7,7 @@ func SendMail(mailTo []string, subject string, body string) error {
 
 	mailConn := map[string]string{
 		"user": "m19884605250@163.com",
-		"pass": "",
+		"pass": "m19884605250",
 		"host": "smtp.163.com",
 		"port": "465",
 	}

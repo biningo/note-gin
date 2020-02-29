@@ -1,11 +1,21 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"note-gin/handler/middleware"
+)
 
 var Router *gin.Engine
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
+	r.Use(middleware.Cors()) //配置跨域
+	r.Use(middleware.Mail()) //监控邮件
+
+	r.Use(gin.BasicAuth(gin.Accounts{
+		"test": "55555",
+	}))
+
 	r.GET("/ping", func(context *gin.Context) {
 		context.Writer.WriteString("Pong")
 	})

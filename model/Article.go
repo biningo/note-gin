@@ -11,7 +11,7 @@ type Article struct {
 	BaseModel
 	Title    string `form:"title" json:"title"`
 	FolderID int64  `form:"folder_id" json:"folder_id"`
-	MkValue  string `form:"mkValue" json:"mkValue" type:"text"`
+	MkValue  string `form:"mkValue" json:"mkValue"`
 }
 
 //Find
@@ -86,6 +86,9 @@ func (this Article) Recover(RedisClient CacheCount.CacheCount) error {
 
 	db.Table("folder").Where("id=?", this.FolderID).Count(&hasFolder)
 	if hasFolder != 0 {
+		db.Table("article").Where("id=?", this.ID).Update("deleted", 0)
+		return nil
+	} else if this.FolderID == 0 {
 		db.Table("article").Where("id=?", this.ID).Update("deleted", 0)
 		return nil
 	} else {

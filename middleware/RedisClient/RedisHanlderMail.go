@@ -9,6 +9,8 @@ func AccessRecord(body string) {
 
 func GetAccessRecord() (result []string) {
 	result = client.LRange("AccessRecord", 0, client.LLen("AccessRecord").Val()).Val()
-	client.Del("AccessRecord") //清除redis记录
 	return
+}
+func DelAccessRecord() {
+	client.Del("AccessRecord") //清除redis记录
 }

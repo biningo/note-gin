@@ -28,3 +28,13 @@ func GetManyMood(c *gin.Context) {
 		Total: int64(total),
 	})
 }
+
+func GetAccessRecord(c *gin.Context) {
+	arr := RedisClient.GetAccessRecord()
+	if len(arr) > 17 {
+		arr = arr[:16]
+	}
+	c.JSON(200, view.DataList{
+		Items: arr,
+	})
+}
