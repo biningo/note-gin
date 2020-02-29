@@ -13,10 +13,10 @@ func Add(c *gin.Context) {
 	articleView := view.ArticleView{}
 	err := c.BindJSON(&articleView)
 	utils.ErrReport(err) //报告错误
+	articleView.FolderID = 0
 
 	article := model.Article{}
 	article.Title = articleView.Title
-
 	if articleView.FolderTitle != "Home" {
 		article.FolderID = model.Folder{}.GetFolderByTitle(articleView.FolderTitle).ID
 	}
@@ -32,14 +32,15 @@ func Add(c *gin.Context) {
 }
 func Update(c *gin.Context) {
 	articleView := view.ArticleView{}
-
 	err := c.ShouldBind(&articleView)
 	utils.ErrReport(err)
 
 	article := model.Article{}
 	article.ID = articleView.ID
 	article.UpdatedAt = time.Now()
-	article.FolderID = articleView.DirPath[len(articleView.DirPath)-1]
+	if len(articleView.DirPath) != 0 {
+		article.FolderID = articleView.DirPath[len(articleView.DirPath)-1]
+	}
 	article.MkValue = articleView.MkValue
 	article.Title = articleView.Title
 	article.Update(CacheCount.CacheCountImpl{})

@@ -9,9 +9,14 @@ import (
 
 func GetTempEdit(article_view *view.ArticleView) {
 	client := RedisInit()
-	s := client.Get("temp_edit").Val()
-	err := json.Unmarshal([]byte(s), article_view)
-	utils.ErrReport(err)
+
+	isExist := client.Exists("temp_edit").Val()
+	if isExist == 1 {
+		s := client.Get("temp_edit").Val()
+
+		err := json.Unmarshal([]byte(s), article_view)
+		utils.ErrReport(err)
+	}
 }
 func SaveTempEdit(temp view.ArticleView) {
 	client := RedisInit()

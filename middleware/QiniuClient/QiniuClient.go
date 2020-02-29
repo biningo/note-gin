@@ -6,7 +6,8 @@ import (
 )
 
 func GetToken() string {
-
+	accessKey := ""
+	secretKey := ""
 	bucket := "note-gin"
 	putPolicy := storage.PutPolicy{
 		Scope: bucket,
