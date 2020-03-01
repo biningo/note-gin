@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 .vscode/
 .env
-./.idea
+.idea
 docker-compose.yml
 fabfile.py
 ./go.sum

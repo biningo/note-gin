@@ -7,6 +7,7 @@ func RedisInit() *redis.Client {
 		Addr:     "",
 		DB:       1,
 		Password: "",
+
 	})
 
 	return client
