@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"log"
-	"note-gin/Interface/CacheCount"
 	"note-gin/middleware/RedisClient"
 	"note-gin/model"
 	"note-gin/utils"
@@ -15,22 +14,20 @@ import (
 
 func DeleteMany(c *gin.Context) {
 	ids := c.QueryArray("items[]")
-	log.Println(ids)
-	model.Article{}.DeleteMany(ids, CacheCount.CacheCountImpl{})
+	model.Article{}.DeleteMany(ids)
 	c.JSON(200, view.OkWithMsg("删除成功!"))
 }
 
 func GetManyArticle(c *gin.Context) {
-	pageStr := c.Param("page")
-	page := utils.StrToInt(pageStr)
+	page := utils.StrToInt(c.Param("page"))
 	articles := model.Article{}.GetMany(page)
 	total := model.Article{}.Count()
 	articleViews := make([]view.ArticleManageView, len(articles))
 
-	for index, v := range articles {
-		articleViews[index].ID = v.ID
-		articleViews[index].Title = v.Title
-		articleViews[index].UpdatedAt = v.UpdatedAt.Format("2006/1/2")
+	for index:= range articles {
+		articleViews[index].ID = articles[index].ID
+		articleViews[index].Title = articles[index].Title
+		articleViews[index].UpdatedAt = articles[index].UpdatedAt.Format("2006/1/2")
 	}
 
 	c.JSON(200, view.DataList{
@@ -39,17 +36,19 @@ func GetManyArticle(c *gin.Context) {
 	})
 }
 
+//显示文章请求
 func GetArticleInfo(c *gin.Context) {
-	id := c.Param("id")
-	article := model.Article{}
-	article.ID = int64(utils.StrToInt(id))
+	article:=model.Article{}
+	article.ID = int64(utils.StrToInt(c.Param("id")))
+
+	log.Println(article.ID)
 	article.GetArticleInfo()
+
 	c.JSON(200, gin.H{
 		"mkValue": article.MkValue,
 		"title":   article.Title,
 		"id":      article.ID,
 	})
-
 }
 
 func GetRubbishArticle(c *gin.Context) {
@@ -67,13 +66,12 @@ func Recover(c *gin.Context) {
 	err := c.ShouldBind(&article)
 	utils.ErrReport(err)
 
-	ok := article.Recover(CacheCount.CacheCountImpl{})
+	ok := article.Recover()
 	if ok != nil {
 		c.JSON(200, view.ErrorWithMsg(ok.Error()))
 	} else {
 		c.JSON(200, view.OkWithMsg("恢复成功！"))
 	}
-
 }
 
 //编辑器临时草稿保存
@@ -87,7 +85,6 @@ func TempEditSave(c *gin.Context) {
 }
 func TempEditGet(c *gin.Context) {
 	article_view := view.ArticleView{}
-
 	RedisClient.GetTempEdit(&article_view)
 	c.JSON(200, view.OkWithData("", article_view))
 }
@@ -101,7 +98,6 @@ func DownLoad(c *gin.Context) {
 	article.ID = int64(utils.StrToInt(c.Param("id")))
 	article.GetArticleInfo()
 	filename := article.Title
-
 	//文件命名
 	c.Writer.Header().Add("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
 	c.Writer.Header().Add("Content-Type", "application/octet-stream")

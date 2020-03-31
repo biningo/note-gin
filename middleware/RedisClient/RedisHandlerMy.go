@@ -7,12 +7,16 @@ import (
 
 func AddBook(book model.MyBook) {
 	client := RedisInit()
+	defer client.Close()
+
+
 	bookStr, _ := json.Marshal(book)
 	client.HSet("my_book", string(book.ID), bookStr)
 }
 
 func GetAllBook() []model.MyBook {
 	client := RedisInit()
+	defer client.Close()
 	m := client.HGetAll("my_book").Val()
 
 	//
@@ -42,5 +46,6 @@ func GetAllBook() []model.MyBook {
 
 func DeleteBook(id int) {
 	client := RedisInit()
+	defer client.Close()
 	client.HDel("my_book", string(id))
 }

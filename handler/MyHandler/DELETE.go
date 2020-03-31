@@ -24,9 +24,6 @@ func DeleteBook(c *gin.Context) {
 	book := model.MyBook{}
 	book.ID = int64(utils.StrToInt(c.Param("id")))
 	book.Delete()
-	//
-	RedisClient.DeleteBook(int(book.ID)) //标记  bug-解决
-	//
-
+	RedisClient.DeleteBook(int(book.ID))
 	c.JSON(200, view.OkWithMsg("删除成功!"))
 }

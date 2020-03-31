@@ -25,6 +25,6 @@ func InitDataBase(conStr string) {
 	}
 
 	db = DB
-	//migration(db)
+	//migration(db) //迁移  首次创建数据库需要迁移创建表
 
 }

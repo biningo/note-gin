@@ -22,6 +22,6 @@ func build(filepath string) {
 	}
 }
 
-func main() {
+func Build() {
 	build(`D:\Go_Code\note-gin\main.go`)
 }

@@ -1,15 +1,18 @@
 package router
 
-import "note-gin/handler/ArticleHandler"
+import (
+	"note-gin/config"
+	"note-gin/handler/ArticleHandler"
+)
 
 func ArticleRouter(base string) {
 	r := Router.Group("/" + base)
-
-	r.GET("/download/:id", ArticleHandler.DownLoad)
+	r.Use(config.Auth)
+	r.GET("/download/:id", config.Auth,ArticleHandler.DownLoad)
 	r.GET("/many/:page", ArticleHandler.GetManyArticle)
-	r.GET("/get/:id", ArticleHandler.GetArticleInfo)
-	r.GET("/delete/forever", ArticleHandler.DeleteForever)
-	r.GET("/delete", ArticleHandler.Delete)
+	r.GET("/get/:id",ArticleHandler.GetArticleInfo)
+	r.GET("/delete/forever",ArticleHandler.DeleteForever)
+	r.GET("/delete",ArticleHandler.Delete)
 	r.GET("/delete/many", ArticleHandler.DeleteMany)
 	r.GET("/rubbish", ArticleHandler.GetRubbishArticle)
 	r.GET("/recover", ArticleHandler.Recover)
@@ -20,4 +23,7 @@ func ArticleRouter(base string) {
 	r.POST("/add", ArticleHandler.Add)
 	r.POST("/update", ArticleHandler.Update)
 	r.POST("/edit", ArticleHandler.Edit)
+
+	r.POST("/set_publish_blog",ArticleHandler.SetPublishBlog)
+
 }

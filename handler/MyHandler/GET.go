@@ -10,7 +10,6 @@ import (
 
 //Book
 func GetAllBook(c *gin.Context) {
-
 	books := RedisClient.GetAllBook()
 	c.JSON(200, view.DataList{
 		Items: books,
@@ -29,12 +28,4 @@ func GetManyMood(c *gin.Context) {
 	})
 }
 
-func GetAccessRecord(c *gin.Context) {
-	arr := RedisClient.GetAccessRecord()
-	if len(arr) > 17 {
-		arr = arr[:16]
-	}
-	c.JSON(200, view.DataList{
-		Items: arr,
-	})
-}
+

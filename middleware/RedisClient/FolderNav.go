@@ -6,6 +6,8 @@ import (
 
 func ChangeFolderNav(folder model.Folder) (nav []string) {
 	client := RedisInit()
+	defer client.Close()
+
 	if folder.Title == "Home" {
 		client.Del("folder_nav")
 		return
@@ -23,11 +25,9 @@ func ChangeFolderNav(folder model.Folder) (nav []string) {
 
 	for i, v := range nav {
 		if folder.Title == v {
-
 			client.LTrim("folder_nav", int64(i), length-1) //【】前后都包括 所以这里-1 当然超过了也没事 不会报错
 			result = client.LRange("folder_nav", 0, client.LLen("folder_nav").Val()-1).Val()
 			nav = result
-
 		}
 	}
 
@@ -42,6 +42,7 @@ func ChangeFolderNav(folder model.Folder) (nav []string) {
 
 func GetCurrentNav() (nav []string) {
 	client := RedisInit()
+	defer client.Close()
 
 	length := client.LLen("folder_nav").Val()
 	if length > 0 {

@@ -2,13 +2,12 @@ package RedisClient
 
 var client = RedisInit()
 
-func AccessRecord(body string) {
-
-	client.LPush("AccessRecord", body)
+func AccessRecord() {
+	client.Incr("AccessRecord")
 }
 
-func GetAccessRecord() (result []string) {
-	result = client.LRange("AccessRecord", 0, client.LLen("AccessRecord").Val()).Val()
+func GetAccessRecord() (result string) {
+	result = client.Get("AccessRecord").Val()
 	return
 }
 func DelAccessRecord() {
