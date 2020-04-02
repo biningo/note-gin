@@ -17,10 +17,9 @@ func InitDataBase(conStr string) {
 	//不加s建表
 	DB.SingularTable(true)
 
-	//日志记录
-	DB.LogMode(true)
 
-	if gin.Mode() == "release" {
+
+	if gin.Mode() == gin.ReleaseMode {
 		DB.LogMode(false)
 	}
 

@@ -74,32 +74,12 @@
 
 我叫 **biningo**  觉得有用，**点个star，中华传统美德😘 难道你想白嫖我嘛😁**
 
+
 前端地址：[https://github.com/biningo/note-vue](https://github.com/biningo/note-vue)
 后端地址：[https://github.com/biningo/note-gin](https://github.com/biningo/note-gin)
-
-----
-【2020-3-31】：
-- md文件上传
-- 分页处理
-- 减去TimeLine模块，预计未来加上Note便签模块
-- 创建文章显示是否立即前往编辑
-- 优化Book模块
-- 添加文章标签标注
-**未来计划：**
-- 增加搜索
-- 增加便签
-- 增加读书笔记
-
-
-
-
-
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170439491.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
-
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170622303.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
-
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170455569.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
-
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020022817050670.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170515801.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170528381.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)

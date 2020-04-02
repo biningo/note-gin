@@ -6,11 +6,9 @@ import (
 
 type Article struct {
 	BaseModel
-	Title    string `form:"title" json:"title"`
-	FolderID int64  `form:"folder_id" json:"folder_id"`
-	MkValue  string `form:"mkValue" json:"mkValue"`
-
-	//博客相关
+	Title       string `form:"title" json:"title"`
+	FolderID    int64  `form:"folder_id" json:"folder_id"`
+	MkValue     string `form:"mkValue" json:"mkValue"`
 	PublishBlog string `form:"publish_blog" json:"publish_blog"` //发布的博客平台
 }
 
@@ -49,10 +47,13 @@ func (this *Article) Update() {
 		db.Create(this)
 	}
 }
+func (this *Article) SetPublishBlog() {
+	db.Model(&this).Update("publish_blog", this.PublishBlog)
+}
 
 //回收到垃圾箱
 func (this *Article) Delete() {
-	db.Model(&this).Update("deleted",true)
+	db.Model(&this).Update("deleted", true)
 }
 
 //真实批量删除【后台】
@@ -79,6 +80,8 @@ func (this Article) Recover() error {
 	}
 }
 
-func (this *Article) SetPublishBlog(){
-	db.Model(&this).Update("publish_blog",this.PublishBlog)
+func (this Article) IsExist() bool {
+	c := 0
+	db.Table("article").Where("title=?",this.Title).Count(&c)
+	return c > 0
 }

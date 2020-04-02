@@ -1,9 +1,11 @@
 package model
 
+import "time"
+
 const (
-	Reading = "在读"
-	Finish  = "读完"
-	Plan    = "想读"
+	Reading = "a在读"
+	Finish  = "b读完"
+	Plan    = "c想读"
 )
 
 type MyBook struct {
@@ -12,10 +14,11 @@ type MyBook struct {
 	Writer string `form:"writer" json:"writer"`
 	ImgURL string `form:"img_url" json:"img_url"` //封面图片
 	Status string `form:"status" json:"status"`
-	Count  int    `form:"count" json:"count"`
+	UpdatedAt time.Time `form:"updated_at" json:"updated_at"`
 }
 
 func (this *MyBook) Add() {
+	this.UpdatedAt = time.Now()
 	db.Create(this)
 }
 
@@ -29,8 +32,6 @@ func (this MyBook) GetAll() (books []MyBook) {
 }
 
 func (this *MyBook) Save() {
-	if this.Status == Finish {
-		this.Count++
-	}
+	this.UpdatedAt = time.Now()
 	db.Save(this)
 }
