@@ -2,7 +2,7 @@ package BookController
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/model"
+	"note-gin/models"
 	"note-gin/pkg/utils"
 	"note-gin/view"
 )
@@ -10,7 +10,7 @@ import (
 
 
 func AddBook(c *gin.Context) {
-	book := model.MyBook{}
+	book := models.MyBook{}
 	err := c.ShouldBind(&book)
 	utils.ErrReport(err)
 	book.Add()
@@ -18,7 +18,7 @@ func AddBook(c *gin.Context) {
 }
 
 func UpdateBook(c *gin.Context) {
-	book := model.MyBook{}
+	book := models.MyBook{}
 	err := c.ShouldBind(&book)
 	utils.ErrReport(err)
 	book.Save()

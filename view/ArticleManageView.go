@@ -1,6 +1,6 @@
 package view
 
-import "note-gin/model"
+import "note-gin/models"
 
 type ArticleManageView struct {
 	ID        int64  `json:"id" form:"id"`
@@ -9,8 +9,8 @@ type ArticleManageView struct {
 	Blogs []string `json:"blogs" form:"blogs"`
 }
 
-func (this ArticleManageView) ToArticle() model.Article {
-	article := model.Article{}
+func (this ArticleManageView) ToArticle() models.Article {
+	article := models.Article{}
 	article.ID = this.ID
 	article.GetArticleInfo()
 	return article

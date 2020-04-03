@@ -1,10 +1,10 @@
 package RedisClient
 
 import (
-	"note-gin/model"
+	"note-gin/models"
 )
 
-func ChangeFolderNav(folder model.Folder) (nav []string) {
+func ChangeFolderNav(folder models.Folder) (nav []string) {
 	if folder.Title == "Home" {
 		RedisClient.Del("folder_nav")
 		return

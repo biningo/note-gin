@@ -6,7 +6,7 @@ import (
 	"io"
 	"note-gin/pkg/RedisClient"
 
-	"note-gin/model"
+	"note-gin/models"
 	"note-gin/pkg/utils"
 	"note-gin/view"
 	"strings"
@@ -14,14 +14,14 @@ import (
 
 func DeleteMany(c *gin.Context) {
 	ids := c.QueryArray("items[]")
-	model.Article{}.DeleteMany(ids)
+	models.Article{}.DeleteMany(ids)
 	c.JSON(200, view.OkWithMsg("删除成功!"))
 }
 
 func GetManyArticle(c *gin.Context) {
 	page := utils.StrToInt(c.Param("page"))
-	articles := model.Article{}.GetMany(page)
-	total := model.Article{}.Count()
+	articles := models.Article{}.GetMany(page)
+	total := models.Article{}.Count()
 	articleViews := make([]view.ArticleManageView, len(articles))
 
 	for index:= range articles {
@@ -38,7 +38,7 @@ func GetManyArticle(c *gin.Context) {
 
 //显示文章请求
 func GetArticleInfo(c *gin.Context) {
-	article:=model.Article{}
+	article:= models.Article{}
 	article.ID = int64(utils.StrToInt(c.Param("id")))
 	article.GetArticleInfo()
 	c.JSON(200, gin.H{
@@ -49,7 +49,7 @@ func GetArticleInfo(c *gin.Context) {
 }
 
 func GetRubbishArticle(c *gin.Context) {
-	articles := model.Article{}.GetDeletedArticle()
+	articles := models.Article{}.GetDeletedArticle()
 	resp := view.DataList{
 		Items: articles,
 		Total: int64(len(articles)),
@@ -61,7 +61,7 @@ func GetRubbishArticle(c *gin.Context) {
 
 //垃圾箱恢复
 func Recover(c *gin.Context) {
-	article := model.Article{}
+	article := models.Article{}
 	err := c.ShouldBind(&article)
 	utils.ErrReport(err)
 
@@ -93,7 +93,7 @@ func TempEditDelete(c *gin.Context) {
 }
 
 func DownLoad(c *gin.Context) {
-	article := model.Article{}
+	article := models.Article{}
 	article.ID = int64(utils.StrToInt(c.Param("id")))
 	article.GetArticleInfo()
 	filename := article.Title

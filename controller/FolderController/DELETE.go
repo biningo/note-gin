@@ -2,14 +2,14 @@ package FolderController
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/model"
+	"note-gin/models"
 	"note-gin/pkg/utils"
 
 	"note-gin/view"
 )
 
 func Delete(c *gin.Context) {
-	folder := model.Folder{}
+	folder := models.Folder{}
 	err := c.ShouldBind(&folder)
 	utils.ErrReport(err)
 	folder.Delete()

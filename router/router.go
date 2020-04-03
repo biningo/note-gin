@@ -12,8 +12,6 @@ func NewRouter() *gin.Engine {
 
 	r.Use(middleware.Cors()) //配置跨域
 
-
-
 	r.GET("/ping", func(context *gin.Context) {
 		context.Writer.WriteString("Pong")
 
@@ -21,7 +19,6 @@ func NewRouter() *gin.Engine {
 	r.NoRoute(func(context *gin.Context) {
 		context.Writer.WriteString("对不起，页面找不到")
 	})
-
 
 	Router = r
 

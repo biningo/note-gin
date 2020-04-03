@@ -1,9 +1,9 @@
 package view
 
-import "note-gin/model"
+import "note-gin/models"
 
 type FileList struct {
-	Folders  []model.Folder
+	Folders  []models.Folder
 	Articles []ArticleManageView
 	Nav      []string
 	Total    int

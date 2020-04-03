@@ -3,7 +3,7 @@ package FolderController
 import (
 	"github.com/gin-gonic/gin"
 	"note-gin/middleware/RedisClient"
-	"note-gin/model"
+	"note-gin/models"
 	"note-gin/pkg/utils"
 	"note-gin/view"
 	"strings"
@@ -19,7 +19,7 @@ func GetSubFile(c *gin.Context) {
 	pageStr := c.Param("page")
 	pageNum := utils.StrToInt(pageStr)
 
-	folder := model.Folder{}
+	folder := models.Folder{}
 	err := c.ShouldBindQuery(&folder)
 	utils.ErrReport(err)
 
@@ -60,7 +60,7 @@ func GetSubFile(c *gin.Context) {
 
 //编辑区目录的懒加载请求
 func GetSelectFolder(c *gin.Context) {
-	folder := model.Folder{}
+	folder := models.Folder{}
 	err := c.ShouldBind(&folder)
 	utils.ErrReport(err)
 

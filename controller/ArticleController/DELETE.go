@@ -2,13 +2,13 @@ package ArticleController
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/model"
+	"note-gin/models"
 	"note-gin/pkg/utils"
 	"note-gin/view"
 )
 
 func Delete(c *gin.Context) {
-	article := model.Article{}
+	article := models.Article{}
 	err := c.ShouldBind(&article)
 	utils.ErrReport(err)
 	article.Delete()
@@ -17,6 +17,6 @@ func Delete(c *gin.Context) {
 
 //清空垃圾桶
 func DeleteForever(c *gin.Context) {
-	model.Article{}.DeleteForever()
+	models.Article{}.DeleteForever()
 	c.JSON(200, view.OkWithMsg("清空成功！"))
 }

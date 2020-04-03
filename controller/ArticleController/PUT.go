@@ -2,7 +2,7 @@ package ArticleController
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/model"
+	"note-gin/models"
 	"note-gin/pkg/utils"
 	"note-gin/view"
 	"strings"
@@ -13,16 +13,16 @@ func Add(c *gin.Context) {
 	articleView := view.ArticleView{}
 	err := c.BindJSON(&articleView)
 	utils.ErrReport(err) //报告错误
-	article := model.Article{}
+	article := models.Article{}
 	article.Title = articleView.Title
 	if articleView.FolderTitle != "Home" {
-		article.FolderID = model.Folder{}.GetFolderByTitle(articleView.FolderTitle).ID
+		article.FolderID = models.Folder{}.GetFolderByTitle(articleView.FolderTitle).ID
 	}
 	article.Add() //这里调用的方法必须是指针类型
 	articleView = view.ArticleSerialize(article)
 	//目录路径获取
-	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)  //先添加自己的根目录
-	model.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
+	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)   //先添加自己的根目录
+	models.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
 	c.JSON(200, view.OkWithData("文章创建成功！", articleView))
 }
 
@@ -30,7 +30,7 @@ func Update(c *gin.Context) {
 	articleView := view.ArticleView{}
 	err := c.ShouldBind(&articleView)
 	utils.ErrReport(err)
-	article := model.Article{}
+	article := models.Article{}
 	article.ID = articleView.ID
 	article.UpdatedAt = time.Now()
 	if len(articleView.DirPath) != 0 {
@@ -55,14 +55,14 @@ func Edit(c *gin.Context) {
 	article := articleManyView.ToArticle()
 	articleView := view.ArticleSerialize(article)
 	//目录路径回溯
-	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)  //先添加自己的根目录
-	model.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
+	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)   //先添加自己的根目录
+	models.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
 	c.JSON(200, view.OkWithData("", articleView))
 }
 
 //设置blog
 func SetPublishBlog(c *gin.Context) {
-	article := model.Article{}
+	article := models.Article{}
 	_ = c.ShouldBind(&article)
 	//article.PublishBlog ,_= c.GetPostForm("publish_blog")
 
@@ -74,14 +74,14 @@ func SetPublishBlog(c *gin.Context) {
 func UploadMd(c *gin.Context) {
 
 	folder_title:=c.GetHeader("Folder-Title")
-	folder_id:=model.Folder{}.GetFolderByTitle(folder_title).ID
+	folder_id:= models.Folder{}.GetFolderByTitle(folder_title).ID
 
 	c.Request.ParseMultipartForm(32 << 20)
 	for name, file := range c.Request.MultipartForm.File {
 		fp, _ := file[0].Open()
 		b := make([]byte, file[0].Size)
 		fp.Read(b)
-		article := model.Article{}
+		article := models.Article{}
 
 		names:=strings.Split(name, ".")
 		article.Title = names[0]

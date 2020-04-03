@@ -1,10 +1,11 @@
-package model
+package models
 
 import (
 	"note-gin/config"
 	"time"
 )
 
+var PageSize  =  config.Conf.SystemConfig
 type Folder struct {
 	BaseModel
 	Title    string `form:"title" json:"title"`
@@ -40,17 +41,17 @@ func (this Folder) GetFolderByID() {
 
 func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
 
-	fds = this.GetSubFolder(page, config.PageSize)
+	fds = this.GetSubFolder(page,PageSize)
 	total = this.CountSubFile()
 	fdsCount := len(fds)
-	if fdsCount < config.PageSize && fdsCount > 0 {
-		//page=page-(this.CountSubFolder()/config.PageSize)  page-1=0
-		articles = this.GetSubArticle(config.PageSize-fdsCount, 0)
+	if fdsCount < PageSize && fdsCount > 0 {
+		//page=page-(this.CountSubFolder()/PageSize)  page-1=0
+		articles = this.GetSubArticle(PageSize-fdsCount, 0)
 	} else if fdsCount == 0 {
 		SubFolderCount := this.CountSubFolder()
-		offset := config.PageSize - (SubFolderCount % config.PageSize)
-		page = page - ((SubFolderCount / config.PageSize) + 1)
-		articles = this.GetSubArticle(config.PageSize, offset+(page-1)*config.PageSize)
+		offset := PageSize - (SubFolderCount % PageSize)
+		page = page - ((SubFolderCount / PageSize) + 1)
+		articles = this.GetSubArticle(PageSize, offset+(page-1)*PageSize)
 	}
 	return
 
