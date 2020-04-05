@@ -9,11 +9,12 @@ import (
 	"github.com/qiniu/api.v7/v7/storage"
 	"io/ioutil"
 	"log"
+	"note-gin/pkg/QiniuClient"
 	"note-gin/view"
 )
 
-var accessKey = "WdlLw-oFN1mbj-0vngrbQ8Si39u0dgackq0v9L4T"
-var secretKey = "HoKZLcwE1BtYWe9ze__jmwWsfqPeAcbHURN48t9A"
+var accessKey = QiniuClient.QiniuAccessKey
+var secretKey = QiniuClient.QiniuSecretKey
 var bucket = "note-gin"
 
 func ImgUpload(c *gin.Context) {
@@ -56,7 +57,6 @@ func ImgUpload(c *gin.Context) {
 		fmt.Println(err)
 		return
 	}
-
 
 	url := "http://gin-note.binnb.top/" + key
 	log.Println("上传图片：", url)

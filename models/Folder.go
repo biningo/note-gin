@@ -5,7 +5,8 @@ import (
 	"time"
 )
 
-var PageSize  =  config.Conf.SystemConfig
+var PageSize = config.Conf.AppConfig.PageSize
+
 type Folder struct {
 	BaseModel
 	Title    string `form:"title" json:"title"`
@@ -41,7 +42,7 @@ func (this Folder) GetFolderByID() {
 
 func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
 
-	fds = this.GetSubFolder(page,PageSize)
+	fds = this.GetSubFolder(page, PageSize)
 	total = this.CountSubFile()
 	fdsCount := len(fds)
 	if fdsCount < PageSize && fdsCount > 0 {
@@ -68,7 +69,7 @@ func (this Folder) GetSubFolder(page, PageSize int) (fds []Folder) {
 }
 
 func (this Folder) GetSubArticle(limit, offset int) (articles []Article) {
-	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Select([]string{"id", "title", "updated_at","publish_blog"}).Find(&articles, "folder_id=?", this.ID)
+	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Select([]string{"id", "title", "updated_at", "publish_blog"}).Find(&articles, "folder_id=?", this.ID)
 	return
 }
 
@@ -116,7 +117,7 @@ func deleteDFS(FolderID int64) {
 	sub_folder := []Folder{}
 	db.Find(&sub_folder, "folder_id=?", FolderID)
 
-	for index:= range sub_folder {
+	for index := range sub_folder {
 		sub_folder[index].Delete()
 	}
 }
