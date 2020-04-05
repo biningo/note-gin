@@ -6,6 +6,7 @@ import (
 	"note-gin/models"
 	"note-gin/pkg/QiniuClient"
 	"note-gin/pkg/RedisClient"
+	"note-gin/pkg/logging"
 	"note-gin/router"
 )
 
@@ -14,6 +15,7 @@ func init() {
 	models.SetUp()
 	RedisClient.SetUp()
 	QiniuClient.SetUp()
+	logging.SetUp()
 }
 
 func main() {

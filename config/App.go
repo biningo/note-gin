@@ -11,12 +11,14 @@ type App struct {
 	Migration      bool   `yaml:"Migration"`
 	QiniuAccessKey string `yaml:"QiniuAccessKey"`
 	QiniuSecretKey string `yaml:"QiniuSecretKey"`
+	LogFilePath    string `yaml:"LogFilePath"`
 }
 
 func (app *App) DefaultAppConfig() {
 	app.PageSize = 0
 	app.QiniuAccessKey = ""
 	app.QiniuSecretKey = ""
+	app.LogFilePath = "/note-gin.log"
 }
 
 func (app *App) InitAppConfig(path string) {
