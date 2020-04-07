@@ -47,7 +47,7 @@ func (this *Article) Update() {
 		db.Create(this)
 	}
 }
-func (this *Article) SetPublishBlog() {
+func (this *Article) SetTag() {
 	db.Model(&this).Update("publish_blog", this.PublishBlog)
 }
 
@@ -82,6 +82,6 @@ func (this Article) Recover() error {
 
 func (this Article) IsExist() bool {
 	c := 0
-	db.Table("article").Where("title=?",this.Title).Count(&c)
+	db.Table("article").Where("title=?", this.Title).Count(&c)
 	return c > 0
 }

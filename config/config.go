@@ -11,8 +11,16 @@ var Conf Config
 
 func SetUp() {
 	var ConfigPath string
-	flag.StringVar(&ConfigPath, "ConfigPath", "", "配置文件路径")
+	flag.StringVar(&ConfigPath, "c", "", "配置文件路径")
 	Conf = NewConfig(ConfigPath)
+}
+
+type Config struct {
+	cfp          configFilePath
+	RedisConfig  Redis
+	MySqlConfig  MySql
+	ServerConfig Server
+	AppConfig    App
 }
 
 func NewConfig(path string) Config {
@@ -25,14 +33,6 @@ func NewConfig(path string) Config {
 	config.MySqlConfig.InitmySqlConfig(config.cfp.MySqlPath)
 
 	return config
-}
-
-type Config struct {
-	cfp          configFilePath
-	RedisConfig  Redis
-	MySqlConfig  MySql
-	ServerConfig Server
-	AppConfig    App
 }
 
 type configFilePath struct {

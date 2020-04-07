@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/controller/middleware"
+	"note-gin/middleware"
 )
 
 var Router *gin.Engine

@@ -10,6 +10,7 @@ var RedisClient *redis.Client
 var redisConfig = config.Conf.RedisConfig
 
 func SetUp() {
+
 	client := redis.NewClient(&redis.Options{
 		Addr:     redisConfig.Addr,
 		DB:       redisConfig.DataBaseNumber,

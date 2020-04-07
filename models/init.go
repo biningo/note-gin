@@ -26,11 +26,13 @@ func SetUp() {
 	//不加s建表
 	DB.SingularTable(true)
 
-	if gin.Mode() == gin.ReleaseMode {
+	if config.Conf.ServerConfig.RunMode == gin.ReleaseMode {
 		DB.LogMode(false)
 	}
-	db = DB
+
 	if config.Conf.AppConfig.Migration {
 		migration(db) //迁移  首次创建数据库需要迁移创建表
 	}
+
+	db = DB
 }

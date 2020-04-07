@@ -18,13 +18,13 @@ func DeleteMany(c *gin.Context) {
 	c.JSON(200, view.OkWithMsg("删除成功!"))
 }
 
-func GetManyArticle(c *gin.Context) {
+func GetArticleByPage(c *gin.Context) {
 	page := utils.StrToInt(c.Param("page"))
 	articles := models.Article{}.GetMany(page)
 	total := models.Article{}.Count()
 	articleViews := make([]view.ArticleManageView, len(articles))
 
-	for index:= range articles {
+	for index := range articles {
 		articleViews[index].ID = articles[index].ID
 		articleViews[index].Title = articles[index].Title
 		articleViews[index].UpdatedAt = articles[index].UpdatedAt.Format("2006/1/2")
@@ -38,7 +38,7 @@ func GetManyArticle(c *gin.Context) {
 
 //显示文章请求
 func GetArticleInfo(c *gin.Context) {
-	article:= models.Article{}
+	article := models.Article{}
 	article.ID = int64(utils.StrToInt(c.Param("id")))
 	article.GetArticleInfo()
 	c.JSON(200, gin.H{
@@ -56,8 +56,6 @@ func GetRubbishArticle(c *gin.Context) {
 	}
 	c.JSON(200, resp)
 }
-
-
 
 //垃圾箱恢复
 func Recover(c *gin.Context) {
@@ -80,7 +78,7 @@ func TempEditSave(c *gin.Context) {
 	utils.ErrReport(err)
 
 	RedisClient.SaveTempEdit(article_view)
-	c.JSON(200, view.OkWithMsg("文章暂存草稿箱,15天后失效！"))
+	c.JSON(200, view.OkWithMsg("文章暂存草稿箱,1天后失效！"))
 }
 func TempEditGet(c *gin.Context) {
 	article_view := view.ArticleView{}
@@ -92,7 +90,7 @@ func TempEditDelete(c *gin.Context) {
 	c.JSON(200, view.OkWithMsg("清除成功!"))
 }
 
-func DownLoad(c *gin.Context) {
+func ArticleDownLoad(c *gin.Context) {
 	article := models.Article{}
 	article.ID = int64(utils.StrToInt(c.Param("id")))
 	article.GetArticleInfo()
@@ -102,4 +100,17 @@ func DownLoad(c *gin.Context) {
 	c.Writer.Header().Add("Content-Type", "application/octet-stream")
 	io.Copy(c.Writer, strings.NewReader(article.MkValue))
 
+}
+
+//编辑按钮点击后请求到编辑器
+func Edit(c *gin.Context) {
+	articleManyView := view.ArticleManageView{}
+	err := c.ShouldBind(&articleManyView)
+	utils.ErrReport(err)
+	article := articleManyView.ToArticle()
+	articleView := view.ArticleSerialize(article)
+	//目录路径回溯
+	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)   //先添加自己的根目录
+	models.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
+	c.JSON(200, view.OkWithData("", articleView))
 }
