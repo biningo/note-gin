@@ -7,7 +7,7 @@ func ArticleRouter(base string) {
 
 	r.GET("/download/:id", ArticleController.ArticleDownLoad)
 	r.GET("/many/:page", ArticleController.GetArticleByPage)
-	r.GET("/get/:id", ArticleController.GetArticleInfo)
+	r.GET("/get/:id", ArticleController.GetArticleDetail)
 	r.GET("/delete/forever", ArticleController.DeleteForever)
 	r.GET("/delete", ArticleController.Delete)
 	r.GET("/delete/many", ArticleController.DeleteMany)

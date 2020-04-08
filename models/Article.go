@@ -6,10 +6,10 @@ import (
 
 type Article struct {
 	BaseModel
-	Title       string `form:"title" json:"title"`
-	FolderID    int64  `form:"folder_id" json:"folder_id"`
-	MkValue     string `form:"mkValue" json:"mkValue"`
-	PublishBlog string `form:"publish_blog" json:"publish_blog"` //发布的博客平台
+	Title    string `form:"title" json:"title"`
+	FolderID int64  `form:"folder_id" json:"folder_id"`
+	MkValue  string `form:"mkValue" json:"mkValue"`
+	Tags     string `form:"tags" json:"tags"` //发布的博客平台
 }
 
 //Find

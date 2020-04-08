@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
-	"note-gin/pkg/RedisClient"
-
 	"note-gin/models"
+	"note-gin/pkg/RedisClient"
 	"note-gin/pkg/utils"
+	"note-gin/service/ArticleService"
 	"note-gin/view"
 	"strings"
 )
@@ -20,32 +20,17 @@ func DeleteMany(c *gin.Context) {
 
 func GetArticleByPage(c *gin.Context) {
 	page := utils.StrToInt(c.Param("page"))
-	articles := models.Article{}.GetMany(page)
-	total := models.Article{}.Count()
-	articleViews := make([]view.ArticleManageView, len(articles))
-
-	for index := range articles {
-		articleViews[index].ID = articles[index].ID
-		articleViews[index].Title = articles[index].Title
-		articleViews[index].UpdatedAt = articles[index].UpdatedAt.Format("2006/1/2")
-	}
-
+	articleLists, total := ArticleService.GetArticleByPage(page)
 	c.JSON(200, view.DataList{
-		Items: articleViews,
+		Items: articleLists,
 		Total: int64(total),
 	})
 }
 
 //显示文章请求
-func GetArticleInfo(c *gin.Context) {
-	article := models.Article{}
-	article.ID = int64(utils.StrToInt(c.Param("id")))
-	article.GetArticleInfo()
-	c.JSON(200, gin.H{
-		"mkValue": article.MkValue,
-		"title":   article.Title,
-		"id":      article.ID,
-	})
+func GetArticleDetail(c *gin.Context) {
+	articleDetail := ArticleService.GetArticleDetail(c.Param("id"))
+	c.JSON(200, articleDetail)
 }
 
 func GetRubbishArticle(c *gin.Context) {
@@ -91,15 +76,11 @@ func TempEditDelete(c *gin.Context) {
 }
 
 func ArticleDownLoad(c *gin.Context) {
-	article := models.Article{}
-	article.ID = int64(utils.StrToInt(c.Param("id")))
-	article.GetArticleInfo()
-	filename := article.Title
+	filename, MkValue := ArticleService.ArticleDownLoad(c.Param("id"))
 	//文件命名
 	c.Writer.Header().Add("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
 	c.Writer.Header().Add("Content-Type", "application/octet-stream")
-	io.Copy(c.Writer, strings.NewReader(article.MkValue))
-
+	io.Copy(c.Writer, strings.NewReader(MkValue))
 }
 
 //编辑按钮点击后请求到编辑器
