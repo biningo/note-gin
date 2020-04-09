@@ -5,24 +5,24 @@ import (
 	"note-gin/models"
 	"note-gin/pkg/utils"
 	"note-gin/view"
+	"note-gin/view/ArticleView"
 	"strings"
 )
 
 func Add(c *gin.Context) {
-	articleView := view.ArticleView{}
-	err := c.BindJSON(&articleView)
+	articleEditView := ArticleView.ArticleEditView{}
+	err := c.ShouldBind(&articleEditView)
 	utils.ErrReport(err) //报告错误
 	article := models.Article{}
-	article.Title = articleView.Title
-	if articleView.FolderTitle != "Home" {
-		article.FolderID = models.Folder{}.GetFolderByTitle(articleView.FolderTitle).ID
+	article.Title = articleEditView.Title
+	if articleEditView.FolderTitle != "Home" {
+		article.FolderID = models.Folder{}.GetFolderByTitle(articleEditView.FolderTitle).ID
 	}
 	article.Add() //这里调用的方法必须是指针类型
-	articleView = view.ArticleSerialize(article)
-	//目录路径获取
-	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)   //先添加自己的根目录
-	models.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
-	c.JSON(200, view.OkWithData("文章创建成功！", articleView))
+	articleEditView.FolderID = article.FolderID
+	articleEditView.DirPath = append(articleEditView.DirPath, articleEditView.FolderID) //先添加自己的根目录
+	models.Folder{}.GetFolderPath(articleEditView.FolderID, &articleEditView.DirPath)   //查找路径
+	c.JSON(200, view.OkWithData("文章创建成功！", articleEditView))
 }
 
 //上传md

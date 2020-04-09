@@ -7,7 +7,6 @@ import (
 	"note-gin/view"
 )
 
-
 func DeleteBook(c *gin.Context) {
 	book := models.MyBook{}
 	book.ID = int64(utils.StrToInt(c.Param("id")))

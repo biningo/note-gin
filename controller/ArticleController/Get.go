@@ -9,6 +9,7 @@ import (
 	"note-gin/pkg/utils"
 	"note-gin/service/ArticleService"
 	"note-gin/view"
+	"note-gin/view/ArticleView"
 	"strings"
 )
 
@@ -58,17 +59,17 @@ func Recover(c *gin.Context) {
 
 //编辑器临时草稿保存
 func TempEditSave(c *gin.Context) {
-	article_view := view.ArticleView{}
-	err := c.ShouldBind(&article_view)
+	articleEditView := ArticleView.ArticleEditView{}
+	err := c.ShouldBind(&articleEditView)
 	utils.ErrReport(err)
 
-	RedisClient.SaveTempEdit(article_view)
+	RedisClient.SaveTempEdit(articleEditView)
 	c.JSON(200, view.OkWithMsg("文章暂存草稿箱,1天后失效！"))
 }
 func TempEditGet(c *gin.Context) {
-	article_view := view.ArticleView{}
-	RedisClient.GetTempEdit(&article_view)
-	c.JSON(200, view.OkWithData("", article_view))
+	articleEditView := ArticleView.ArticleEditView{}
+	RedisClient.GetTempEdit(&articleEditView)
+	c.JSON(200, view.OkWithData("", articleEditView))
 }
 func TempEditDelete(c *gin.Context) {
 	RedisClient.DeleteTempEdit()
@@ -85,13 +86,11 @@ func ArticleDownLoad(c *gin.Context) {
 
 //编辑按钮点击后请求到编辑器
 func Edit(c *gin.Context) {
-	articleManyView := view.ArticleManageView{}
-	err := c.ShouldBind(&articleManyView)
+	articleEditView := ArticleView.ArticleEditView{}
+	err := c.ShouldBindUri(&articleEditView)
 	utils.ErrReport(err)
-	article := articleManyView.ToArticle()
-	articleView := view.ArticleSerialize(article)
 	//目录路径回溯
-	articleView.DirPath = append(articleView.DirPath, articleView.FolderID)   //先添加自己的根目录
-	models.Folder{}.GetFolderPath(articleView.FolderID, &articleView.DirPath) //查找路径
-	c.JSON(200, view.OkWithData("", articleView))
+	articleEditView.DirPath = append(articleEditView.DirPath, articleEditView.FolderID) //先添加自己的根目录
+	models.Folder{}.GetFolderPath(articleEditView.FolderID, &articleEditView.DirPath)   //查找路径
+	c.JSON(200, view.OkWithData("", articleEditView))
 }

@@ -14,8 +14,3 @@ func GetAllBook(c *gin.Context) {
 		Total: int64(len(books)),
 	})
 }
-
-
-
-
-

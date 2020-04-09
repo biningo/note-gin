@@ -36,15 +36,15 @@ func GetSubFile(c *gin.Context) {
 
 	folders, articles, total := folder.GetSubFile(pageNum) //根据页码查找这个目录下的全部文件 total
 	manyArticles := make([]view.ArticleManageView, len(articles))
-	for i:= range articles {
+	for i := range articles {
 		manyArticles[i].ID = articles[i].ID
 		manyArticles[i].Title = articles[i].Title
 		manyArticles[i].UpdatedAt = articles[i].UpdatedAt.Format("2006-01-02")
-		blogs:=strings.Split(articles[i].PublishBlog,",")
-		if len(blogs)>0{
-			manyArticles[i].Blogs=blogs
-		}else{
-			manyArticles[i].Blogs=nil
+		blogs := strings.Split(articles[i].PublishBlog, ",")
+		if len(blogs) > 0 {
+			manyArticles[i].Blogs = blogs
+		} else {
+			manyArticles[i].Blogs = nil
 		}
 	}
 	resp := view.FileList{
@@ -56,7 +56,6 @@ func GetSubFile(c *gin.Context) {
 
 	c.JSON(200, resp)
 }
-
 
 //编辑区目录的懒加载请求
 func GetSelectFolder(c *gin.Context) {

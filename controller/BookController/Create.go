@@ -7,8 +7,6 @@ import (
 	"note-gin/view"
 )
 
-
-
 func AddBook(c *gin.Context) {
 	book := models.MyBook{}
 	err := c.ShouldBind(&book)

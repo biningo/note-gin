@@ -19,7 +19,7 @@ func ArticleRouter(base string) {
 	r.POST("/temp_save", ArticleController.TempEditSave) //编辑器保存
 	r.POST("/add", ArticleController.Add)
 	r.POST("/update", ArticleController.Update)
-	r.POST("/edit", ArticleController.Edit)
-	r.POST("/set_publish_blog", ArticleController.SetTag)
+	r.GET("/edit/:id", ArticleController.Edit)
+	r.POST("/set_tag", ArticleController.SetTag)
 	r.POST("/upload_md", ArticleController.UploadArticle)
 }
