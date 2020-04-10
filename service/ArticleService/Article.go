@@ -3,38 +3,50 @@ package ArticleService
 import (
 	"note-gin/models"
 	"note-gin/pkg/utils"
+	"note-gin/view"
 	"note-gin/view/ArticleView"
-	"strings"
 )
-
-func GetArticleDetail(ID string) ArticleView.ArticleDetail {
-	article := models.Article{}
-	article.ID = int64(utils.StrToInt(ID))
-	article.GetArticleInfo()
-	articleDetail := ArticleView.ArticleDetail{
-		ID:      article.ID,
-		Title:   article.Title,
-		MkValue: article.MkValue,
-	}
-
-	return articleDetail
-}
 
 func ArticleDownLoad(ID string) (string, string) {
 	article := GetArticleDetail(ID)
 	return article.Title, article.MkValue
 }
 
-func GetArticleByPage(page int) ([]ArticleView.ArticleList, int) {
+func GetArticleByPage(page int) ([]ArticleView.ArticleInfo, int) {
 	articles := models.Article{}.GetMany(page)
 	total := models.Article{}.Count()
-	articleList := make([]ArticleView.ArticleList, len(articles))
+	ArticleInfos := ArticleView.ToArticleInfos(articles)
+	return ArticleInfos, total
+}
 
-	for index := range articles {
-		articleList[index].ID = articles[index].ID
-		articleList[index].Title = articles[index].Title
-		articleList[index].UpdatedAt = articles[index].UpdatedAt.Format("2006/1/2")
-		articleList[index].Tags = strings.Split(articles[index].Tags, ",")
+func GetArticleDetail(ID string) ArticleView.ArticleDetail {
+	article := models.Article{}
+	article.ID = int64(utils.StrToInt(ID))
+	article.GetArticleInfo()
+	articleDetail := ArticleView.ToArticleDetail(article)
+	return articleDetail
+}
+
+func ClearRubbish() {
+	models.Article{}.ClearRubbish()
+}
+
+func Delete(ID string) int64 {
+	article := models.Article{}
+	article.ID = int64(utils.StrToInt(ID))
+	article.Delete()
+	return article.ID
+}
+
+func DeleteMany(IDs []string) {
+	models.Article{}.DeleteMany(IDs)
+}
+
+func GetRubbishArticles() view.DataList {
+	articles := models.Article{}.GetDeletedArticle()
+	respDataList := view.DataList{
+		Items: articles,
+		Total: int64(len(articles)),
 	}
-	return articleList, total
+	return respDataList
 }

@@ -14,16 +14,15 @@ import (
 )
 
 func DeleteMany(c *gin.Context) {
-	ids := c.QueryArray("items[]")
-	models.Article{}.DeleteMany(ids)
+	ArticleService.DeleteMany(c.QueryArray("items[]"))
 	c.JSON(200, view.OkWithMsg("删除成功!"))
 }
 
 func GetArticleByPage(c *gin.Context) {
 	page := utils.StrToInt(c.Param("page"))
-	articleLists, total := ArticleService.GetArticleByPage(page)
+	articleInfos, total := ArticleService.GetArticleByPage(page)
 	c.JSON(200, view.DataList{
-		Items: articleLists,
+		Items: articleInfos,
 		Total: int64(total),
 	})
 }
@@ -34,13 +33,9 @@ func GetArticleDetail(c *gin.Context) {
 	c.JSON(200, articleDetail)
 }
 
-func GetRubbishArticle(c *gin.Context) {
-	articles := models.Article{}.GetDeletedArticle()
-	resp := view.DataList{
-		Items: articles,
-		Total: int64(len(articles)),
-	}
-	c.JSON(200, resp)
+func GetRubbishArticles(c *gin.Context) {
+	respDataList := ArticleService.GetRubbishArticles()
+	c.JSON(200, respDataList)
 }
 
 //垃圾箱恢复

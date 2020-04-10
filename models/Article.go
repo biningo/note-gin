@@ -62,7 +62,7 @@ func (this Article) DeleteMany(ids []string) {
 }
 
 //清空垃圾箱
-func (this Article) DeleteForever() {
+func (this Article) ClearRubbish() {
 	db.Where("deleted <> 0").Delete(&Article{})
 }
 
