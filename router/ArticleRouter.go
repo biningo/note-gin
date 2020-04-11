@@ -12,12 +12,10 @@ func ArticleRouter(base string) {
 	r.GET("/delete", ArticleController.Delete)
 	r.GET("/delete/many", ArticleController.DeleteMany)
 	r.GET("/rubbish", ArticleController.GetRubbishArticles)
-	//-------------------------------
-
-	r.GET("/recover", ArticleController.Recover)
-	r.GET("/temp_get", ArticleController.TempEditGet) //获取上次的编辑器保存
-	r.GET("/temp_delete", ArticleController.TempEditDelete)
-	r.POST("/temp_save", ArticleController.TempEditSave) //编辑器保存
+	r.GET("/recover", ArticleController.ArticleRecover)
+	r.GET("/temp_get", ArticleController.TempArticleEditGet) //获取上次的编辑器保存
+	r.GET("/temp_delete", ArticleController.TempArticleEditDelete)
+	r.POST("/temp_save", ArticleController.TempArticleEditSave) //编辑器保存
 	r.POST("/add", ArticleController.Add)
 	r.POST("/update", ArticleController.Update)
 	r.GET("/edit/:id", ArticleController.Edit)

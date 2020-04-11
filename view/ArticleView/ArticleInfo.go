@@ -3,6 +3,7 @@ package ArticleView
 import (
 	"note-gin/models"
 	"strings"
+	"time"
 )
 
 type ArticleInfo struct {
@@ -22,4 +23,13 @@ func ToArticleInfos(articles []models.Article) []ArticleInfo {
 		ArticleInfos[index].Tags = strings.Split(articles[index].Tags, ",")
 	}
 	return ArticleInfos
+}
+
+func ToArticle(articleInfo ArticleInfo) models.Article {
+	article := models.Article{}
+	article.ID = articleInfo.ID
+	article.Title = articleInfo.Title
+	article.Tags = strings.Join(articleInfo.Tags, ",")
+	article.UpdatedAt, _ = time.Parse("2006-01-02", articleInfo.UpdatedAt)
+	return article
 }

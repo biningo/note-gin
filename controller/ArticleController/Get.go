@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
-	"note-gin/models"
-	"note-gin/pkg/RedisClient"
 	"note-gin/pkg/utils"
 	"note-gin/service/ArticleService"
 	"note-gin/view"
@@ -39,36 +37,44 @@ func GetRubbishArticles(c *gin.Context) {
 }
 
 //垃圾箱恢复
-func Recover(c *gin.Context) {
-	article := models.Article{}
-	err := c.ShouldBind(&article)
-	utils.ErrReport(err)
-
-	ok := article.Recover()
-	if ok != nil {
-		c.JSON(200, view.ErrorWithMsg(ok.Error()))
+func ArticleRecover(c *gin.Context) {
+	err := ArticleService.ArticleRecover(c.Query("id"))
+	if err != nil {
+		c.JSON(200, view.ErrorWithMsg(err.Error()))
 	} else {
 		c.JSON(200, view.OkWithMsg("恢复成功！"))
 	}
 }
 
 //编辑器临时草稿保存
-func TempEditSave(c *gin.Context) {
+func TempArticleEditSave(c *gin.Context) {
 	articleEditView := ArticleView.ArticleEditView{}
 	err := c.ShouldBind(&articleEditView)
 	utils.ErrReport(err)
+	flag := ArticleService.TempArticleEditSave(articleEditView)
+	if flag {
+		c.JSON(200, view.OkWithMsg("文章暂存草稿箱,1天后失效！"))
+	} else {
+		c.JSON(200, view.OkWithMsg("文章保存失败"))
+	}
+}
 
-	RedisClient.SaveTempEdit(articleEditView)
-	c.JSON(200, view.OkWithMsg("文章暂存草稿箱,1天后失效！"))
+func TempArticleEditGet(c *gin.Context) {
+
+	if articleEditView, ok := ArticleService.TempArticleEditGet(); ok {
+		c.JSON(200, view.OkWithData("", articleEditView))
+	} else {
+		c.JSON(200, view.OkWithData("获取失败", articleEditView))
+	}
 }
-func TempEditGet(c *gin.Context) {
-	articleEditView := ArticleView.ArticleEditView{}
-	RedisClient.GetTempEdit(&articleEditView)
-	c.JSON(200, view.OkWithData("", articleEditView))
-}
-func TempEditDelete(c *gin.Context) {
-	RedisClient.DeleteTempEdit()
-	c.JSON(200, view.OkWithMsg("清除成功!"))
+
+func TempArticleEditDelete(c *gin.Context) {
+	flag := ArticleService.TempArticleEditDelete()
+	if flag == 1 {
+		c.JSON(200, view.OkWithMsg("清除成功!"))
+	} else {
+		c.JSON(200, view.OkWithMsg("清除失败:"+string(flag)))
+	}
 }
 
 func ArticleDownLoad(c *gin.Context) {
@@ -84,8 +90,6 @@ func Edit(c *gin.Context) {
 	articleEditView := ArticleView.ArticleEditView{}
 	err := c.ShouldBindUri(&articleEditView)
 	utils.ErrReport(err)
-	//目录路径回溯
-	articleEditView.DirPath = append(articleEditView.DirPath, articleEditView.FolderID) //先添加自己的根目录
-	models.Folder{}.GetFolderPath(articleEditView.FolderID, &articleEditView.DirPath)   //查找路径
+	ArticleService.Edit(&articleEditView)
 	c.JSON(200, view.OkWithData("", articleEditView))
 }

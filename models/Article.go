@@ -48,7 +48,7 @@ func (this *Article) Update() {
 	}
 }
 func (this *Article) SetTag() {
-	db.Model(&this).Update("publish_blog", this.PublishBlog)
+	db.Model(&this).Update("tags", this.Tags)
 }
 
 //回收到垃圾箱
