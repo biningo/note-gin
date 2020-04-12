@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
+	"note-gin/pkg/HttpCode"
 	"note-gin/pkg/utils"
 	"note-gin/service/ArticleService"
 	"note-gin/view"
@@ -28,19 +29,19 @@ func GetArticleByPage(c *gin.Context) {
 //显示文章请求
 func GetArticleDetail(c *gin.Context) {
 	articleDetail := ArticleService.GetArticleDetail(c.Param("id"))
-	c.JSON(200, articleDetail)
+	c.JSON(HttpCode.SUCCESS, articleDetail)
 }
 
 func GetRubbishArticles(c *gin.Context) {
 	respDataList := ArticleService.GetRubbishArticles()
-	c.JSON(200, respDataList)
+	c.JSON(HttpCode.SUCCESS, respDataList)
 }
 
 //垃圾箱恢复
 func ArticleRecover(c *gin.Context) {
 	err := ArticleService.ArticleRecover(c.Query("id"))
 	if err != nil {
-		c.JSON(200, view.ErrorWithMsg(err.Error()))
+		c.JSON(HttpCode.ERROR_RECOVER, view.ErrorWithMsg(HttpCode.HttpMsg[HttpCode.ERROR_RECOVER]))
 	} else {
 		c.JSON(200, view.OkWithMsg("恢复成功！"))
 	}
@@ -53,9 +54,9 @@ func TempArticleEditSave(c *gin.Context) {
 	utils.ErrReport(err)
 	flag := ArticleService.TempArticleEditSave(articleEditView)
 	if flag {
-		c.JSON(200, view.OkWithMsg("文章暂存草稿箱,1天后失效！"))
+		c.JSON(HttpCode.SUCCESS, view.OkWithMsg("文章暂存草稿箱,1天后失效！"))
 	} else {
-		c.JSON(200, view.OkWithMsg("文章保存失败"))
+		c.JSON(HttpCode.ERROR_TEMP_SAVE, view.OkWithMsg(HttpCode.HttpMsg[HttpCode.ERROR_TEMP_SAVE]))
 	}
 }
 
@@ -91,5 +92,5 @@ func Edit(c *gin.Context) {
 	err := c.ShouldBindUri(&articleEditView)
 	utils.ErrReport(err)
 	ArticleService.Edit(&articleEditView)
-	c.JSON(200, view.OkWithData("", articleEditView))
+	c.JSON(HttpCode.SUCCESS, view.OkWithData("", articleEditView))
 }

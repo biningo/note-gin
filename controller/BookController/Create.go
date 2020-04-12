@@ -3,6 +3,8 @@ package BookController
 import (
 	"github.com/gin-gonic/gin"
 	"note-gin/models"
+	"note-gin/pkg/HttpCode"
+	"note-gin/pkg/logging"
 	"note-gin/pkg/utils"
 	"note-gin/view"
 )
@@ -10,9 +12,9 @@ import (
 func AddBook(c *gin.Context) {
 	book := models.MyBook{}
 	err := c.ShouldBind(&book)
-	utils.ErrReport(err)
+	logging.Error(err.Error())
 	book.Add()
-	c.JSON(200, view.OkWithData("添加成功!", book))
+	c.JSON(HttpCode.SUCCESS, view.OkWithData("添加成功!", book))
 }
 
 func UpdateBook(c *gin.Context) {
@@ -20,5 +22,5 @@ func UpdateBook(c *gin.Context) {
 	err := c.ShouldBind(&book)
 	utils.ErrReport(err)
 	book.Save()
-	c.JSON(200, view.OkWithMsg("修改成功!"))
+	c.JSON(HttpCode.SUCCESS, view.OkWithMsg("修改成功!"))
 }

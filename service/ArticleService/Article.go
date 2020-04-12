@@ -4,8 +4,8 @@ import (
 	"errors"
 	"mime/multipart"
 	"note-gin/models"
+	"note-gin/pkg/HttpCode"
 	"note-gin/pkg/RedisClient"
-	"note-gin/pkg/StatusCode"
 	"note-gin/pkg/utils"
 	"note-gin/service/FolderService"
 	"note-gin/view"
@@ -129,7 +129,7 @@ func UploadArticle(files map[string][]*multipart.FileHeader, folder_title string
 		names := strings.Split(name, ".")
 		typeName := names[1]
 		if typeName != "md" {
-			return false, errors.New(StatusCode.ErrorMsg[StatusCode.ERROR_FILE_TYPE])
+			return false, errors.New(HttpCode.ErrorMsg[HttpCode.ERROR_FILE_TYPE])
 		}
 
 		fp, _ := file[0].Open()
@@ -146,7 +146,7 @@ func UploadArticle(files map[string][]*multipart.FileHeader, folder_title string
 			article.Add()
 			return true, nil
 		} else {
-			return false, errors.New(StatusCode.ErrorMsg[StatusCode.ERROR_FILE_NOT_EXIST])
+			return false, errors.New(HttpCode.ErrorMsg[HttpCode.ERROR_FILE_NOT_EXIST])
 		}
 
 	}

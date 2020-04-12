@@ -2,7 +2,8 @@ package ArticleController
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/pkg/utils"
+	"note-gin/pkg/HttpCode"
+	"note-gin/pkg/logging"
 	"note-gin/service/ArticleService"
 	"note-gin/view"
 	"note-gin/view/ArticleView"
@@ -19,7 +20,7 @@ func SetTag(c *gin.Context) {
 func Update(c *gin.Context) {
 	articleEditView := ArticleView.ArticleEditView{}
 	err := c.ShouldBind(&articleEditView)
-	utils.ErrReport(err)
+	logging.Error(err.Error())
 	ArticleService.Update(&articleEditView)
-	c.JSON(200, view.OkWithData("文章保存成功！", articleEditView))
+	c.JSON(HttpCode.SUCCESS, view.OkWithData("文章保存成功！", articleEditView))
 }
