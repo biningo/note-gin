@@ -2,11 +2,12 @@ package FolderController
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/middleware/RedisClient"
 	"note-gin/models"
+	"note-gin/pkg/RedisClient"
 	"note-gin/pkg/utils"
+	"note-gin/service/FolderService"
 	"note-gin/view"
-	"strings"
+	"note-gin/view/FolderView"
 )
 
 func GetCurrentNav(c *gin.Context) {
@@ -16,40 +17,21 @@ func GetCurrentNav(c *gin.Context) {
 }
 
 func GetSubFile(c *gin.Context) {
-	pageStr := c.Param("page")
-	pageNum := utils.StrToInt(pageStr)
+	page := c.Param("page")
+	folder_title := c.Query("title")
 
-	folder := models.Folder{}
-	err := c.ShouldBindQuery(&folder)
-	utils.ErrReport(err)
+	folderInfos, articleInfos, total := FolderService.GetSubFile(folder_title, utils.StrToInt(page))
 
 	//导航
-	var nav []string
-	if pageNum == 1 { //page=1才可能是其他目录
-		nav = RedisClient.ChangeFolderNav(folder) //改变redis目录路径的缓存
+	var nav []string //如果是AccessFolder  则需要加载  如果是页码跳转 则不需要加载 前端还是保留以前的nav
+	if page == "1" { //page=1才可能是其他目录
+		nav = RedisClient.ChangeFolderNav(folder_title) //改变redis目录路径的缓存
 		nav = append(nav, "Home")
 	}
 
-	if folder.ID == 0 && folder.Title != "Home" { //导航跳转
-		folder = folder.GetFolderByTitle(folder.Title)
-	}
-
-	folders, articles, total := folder.GetSubFile(pageNum) //根据页码查找这个目录下的全部文件 total
-	manyArticles := make([]view.ArticleManageView, len(articles))
-	for i := range articles {
-		manyArticles[i].ID = articles[i].ID
-		manyArticles[i].Title = articles[i].Title
-		manyArticles[i].UpdatedAt = articles[i].UpdatedAt.Format("2006-01-02")
-		blogs := strings.Split(articles[i].PublishBlog, ",")
-		if len(blogs) > 0 {
-			manyArticles[i].Blogs = blogs
-		} else {
-			manyArticles[i].Blogs = nil
-		}
-	}
 	resp := view.FileList{
-		Folders:  folders,
-		Articles: manyArticles,
+		Folders:  folderInfos,
+		Articles: articleInfos,
 		Nav:      nav,
 		Total:    total,
 	}
@@ -65,9 +47,9 @@ func GetSelectFolder(c *gin.Context) {
 
 	folders := folder.GetSubFolderNoPage()
 	//这里出错了一个小细节  make指定长度切片就可以直接引用位置了 如果再append的方式加入元素则会重新创建空间
-	FolderSelectList := make([]view.FolderSelect, len(folders))
+	FolderSelectList := make([]FolderView.FolderSelect, len(folders))
 	for i := range folders {
-		FolderSelectList[i] = view.FolderSelect{
+		FolderSelectList[i] = FolderView.FolderSelect{
 			Value: folders[i].ID,
 			Label: folders[i].Title,
 			Leaf:  folders[i].CountSubFolder() <= 0,

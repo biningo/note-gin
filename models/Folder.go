@@ -77,9 +77,8 @@ func (this Folder) GetFolderInfo() {
 	db.Where(this).First(&this)
 }
 
-func (this Folder) GetFolderByTitle(title string) Folder {
-	db.Where("title=?", title).First(&this)
-	return this
+func (this Folder) GetFolderByTitle() {
+	db.Where("title=?", this.Title).First(&this)
 }
 
 //count

@@ -1,4 +1,4 @@
-package view
+package FolderView
 
 type FolderSelect struct {
 	Value    int64          `json:"value" form:"value"`
