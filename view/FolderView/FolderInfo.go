@@ -1,6 +1,9 @@
 package FolderView
 
-import "note-gin/models"
+import (
+	"note-gin/models"
+	"time"
+)
 
 type FolderInfo struct {
 	ID        int64  `json:"id" form:"id"`
@@ -8,11 +11,21 @@ type FolderInfo struct {
 	UpdatedAt string `form:"updated_at" json:"updated_at"`
 }
 
+
+func ToFolder(folderInfo FolderInfo) models.Folder {
+	folder:=models.Folder{}
+	folder.ID  = folderInfo.ID
+	folder.Title = folderInfo.Title
+	folder.UpdatedAt,_ = time.Parse("2006-01-02", folderInfo.UpdatedAt)
+	return folder
+}
+
 func ToFolderInfo(folder models.Folder) FolderInfo {
 	folderInfo := FolderInfo{}
 	folderInfo.ID = folder.ID
 	folderInfo.UpdatedAt = folder.UpdatedAt.Format("2006-01-02")
 	folderInfo.Title = folder.Title
+	return folderInfo
 }
 
 func ToFolderInfos(folders []models.Folder) []FolderInfo {

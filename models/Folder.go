@@ -42,7 +42,7 @@ func (this Folder) GetFolderByID() {
 
 func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
 
-	fds = this.GetSubFolder(page, PageSize)
+	fds = this.GetSubFolderOnPage(page, PageSize)
 	total = this.CountSubFile()
 	fdsCount := len(fds)
 	if fdsCount < PageSize && fdsCount > 0 {
@@ -58,12 +58,12 @@ func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total
 
 }
 
-func (this Folder) GetSubFolderNoPage() (folders []Folder) {
-	db.Where("folder_id=?", this.ID).Find(&folders)
+func (this Folder) GetSubFolders() (folders []Folder) {
+	db.Table("folder").Where("folder_id=?", this.ID).Find(&folders)
 	return
 }
 
-func (this Folder) GetSubFolder(page, PageSize int) (fds []Folder) {
+func (this Folder) GetSubFolderOnPage(page, PageSize int) (fds []Folder) {
 	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.ID)
 	return
 }
@@ -115,7 +115,6 @@ func deleteDFS(FolderID int64) {
 	db.Table("article").Where("folder_id=?", FolderID).Update("deleted", true)
 	sub_folder := []Folder{}
 	db.Find(&sub_folder, "folder_id=?", FolderID)
-
 	for index := range sub_folder {
 		sub_folder[index].Delete()
 	}

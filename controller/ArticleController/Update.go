@@ -5,8 +5,8 @@ import (
 	"note-gin/pkg/HttpCode"
 	"note-gin/pkg/logging"
 	"note-gin/service/ArticleService"
-	"note-gin/view"
 	"note-gin/view/ArticleView"
+	"note-gin/view/common"
 )
 
 //设置blog
@@ -22,5 +22,5 @@ func Update(c *gin.Context) {
 	err := c.ShouldBind(&articleEditView)
 	logging.Error(err.Error())
 	ArticleService.Update(&articleEditView)
-	c.JSON(HttpCode.SUCCESS, view.OkWithData("文章保存成功！", articleEditView))
+	c.JSON(HttpCode.SUCCESS, common.OkWithData("文章保存成功！", articleEditView))
 }

@@ -2,15 +2,14 @@ package FolderController
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/models"
-	"note-gin/view"
+	"note-gin/service/FolderService"
+	"note-gin/view/common"
 )
 
 func Add(c *gin.Context) {
-	folder := models.Folder{}
-	folder.Title = c.Query("title")
-	FolderTitle := c.Query("FolderTitle")
-	folder.FolderID = models.Folder{}.GetFolderByTitle(FolderTitle).ID
-	folder.Add()
-	c.JSON(200, view.OkWithData("目录创建成功！", folder))
+	Title := c.Query("title")
+	FatherTitle := c.Query("FatherTitle")
+
+	FolderService.Add(Title, FatherTitle)
+	c.JSON(200, common.OkWithMsg("目录创建成功！"))
 }

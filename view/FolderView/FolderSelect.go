@@ -1,8 +1,8 @@
 package FolderView
 
-type FolderSelect struct {
+type FolderSelectView struct {
 	Value    int64          `json:"value" form:"value"`
 	Label    string         `json:"label" form:"label"`
 	Leaf     bool           `json:"leaf" form:"leaf"`
-	Children []FolderSelect `json:"children" form:"children"`
+	Children []FolderSelectView `json:"children" form:"children"`
 }

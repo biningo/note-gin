@@ -1,8 +1,5 @@
-.vscode/
-.env
+build.go
 .idea
-docker-compose.yml
-fabfile.py
-./go.sum
+go.sum
 
 

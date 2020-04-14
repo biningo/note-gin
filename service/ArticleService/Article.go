@@ -8,8 +8,8 @@ import (
 	"note-gin/pkg/RedisClient"
 	"note-gin/pkg/utils"
 	"note-gin/service/FolderService"
-	"note-gin/view"
 	"note-gin/view/ArticleView"
+	"note-gin/view/common"
 	"strings"
 	"time"
 )
@@ -49,9 +49,9 @@ func DeleteMany(IDs []string) {
 	models.Article{}.DeleteMany(IDs)
 }
 
-func GetRubbishArticles() view.DataList {
+func GetRubbishArticles() common.DataList {
 	articles := models.Article{}.GetDeletedArticle()
-	respDataList := view.DataList{
+	respDataList := common.DataList{
 		Items: articles,
 		Total: int64(len(articles)),
 	}
@@ -68,7 +68,7 @@ func Add(articleEditView *ArticleView.ArticleEditView) {
 	article := models.Article{}
 	article.Title = articleEditView.Title
 	if articleEditView.FolderTitle != "Home" {
-		article.FolderID = models.Folder{}.GetFolderByTitle(articleEditView.FolderTitle).ID
+		article.FolderID = FolderService.GetFolderByTitle(articleEditView.FolderTitle).ID
 	}
 	article.Add() //这里调用的方法必须是指针类型
 	articleEditView.FolderID = article.FolderID
@@ -124,12 +124,12 @@ func TempArticleEditSave(articleEditView ArticleView.ArticleEditView) bool {
 }
 
 func UploadArticle(files map[string][]*multipart.FileHeader, folder_title string, file_name *string) (bool, error) {
-	folder_id := models.Folder{}.GetFolderByTitle(folder_title).ID
+	folder_id := FolderService.GetFolderByTitle(folder_title).ID
 	for name, file := range files {
 		names := strings.Split(name, ".")
 		typeName := names[1]
 		if typeName != "md" {
-			return false, errors.New(HttpCode.ErrorMsg[HttpCode.ERROR_FILE_TYPE])
+			return false, errors.New(HttpCode.HttpMsg[HttpCode.ERROR_FILE_TYPE])
 		}
 
 		fp, _ := file[0].Open()
@@ -146,7 +146,7 @@ func UploadArticle(files map[string][]*multipart.FileHeader, folder_title string
 			article.Add()
 			return true, nil
 		} else {
-			return false, errors.New(HttpCode.ErrorMsg[HttpCode.ERROR_FILE_NOT_EXIST])
+			return false, errors.New(HttpCode.HttpMsg[HttpCode.ERROR_FILE_NOT_EXIST])
 		}
 
 	}
