@@ -37,9 +37,9 @@ func UploadArticle(c *gin.Context) {
 	if isExist != true {
 		c.JSON(HttpCode.SUCCESS, common.OkWithMsg("添加成功："+file_name))
 	} else {
-		c.JSON(HttpCode.ERROR_FILE_IS_EXIST, common.RespBean{
+		c.JSON(HttpCode.FILE_IS_EXIST_AND_UPDATE, common.RespBean{
 			Code: 412,
-			Msg:  "文件 " + file_name + " 已经存在" + HttpCode.HttpMsg[HttpCode.ERROR_FILE_IS_EXIST],
+			Msg:  "文件 " + file_name + " 已经存在;" + ERROR.Error(), //文件已经更新的警告
 			Data: nil,
 		})
 	}

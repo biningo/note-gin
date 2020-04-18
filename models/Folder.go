@@ -9,8 +9,8 @@ var PageSize = config.Conf.AppConfig.PageSize
 
 type Folder struct {
 	BaseModel
-	Title    string `form:"title" json:"title"`
-	FolderID int64  //前一个文件夹
+	Title    string
+	FolderID int64 //前一个文件夹
 }
 
 //Find

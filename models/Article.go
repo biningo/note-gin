@@ -6,10 +6,10 @@ import (
 
 type Article struct {
 	BaseModel
-	Title    string `form:"title" json:"title"`
-	FolderID int64  `form:"folder_id" json:"folder_id"`
-	MkValue  string `form:"mkValue" json:"mkValue"`
-	Tags     string `form:"tags" json:"tags"` //发布的博客平台
+	Title    string
+	FolderID int64
+	MkValue  string
+	Tags     string
 }
 
 //Find
@@ -27,6 +27,9 @@ func (this Article) GetMany(page int) (articles []Article) {
 
 func (this *Article) GetArticleInfo() {
 	db.Where("id=?", this.ID).First(&this)
+}
+func (this *Article) GetArticleInfoByTitle() {
+	db.Where("title=?", this.Title).First(&this)
 }
 
 func (this Article) GetDeletedArticle() (articles []Article) {

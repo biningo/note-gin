@@ -145,8 +145,12 @@ func UploadArticle(files map[string][]*multipart.FileHeader, folder_title string
 			article.MkValue = string(b)
 			article.Add()
 			return true, nil
-		} else {
-			return false, errors.New(HttpCode.HttpMsg[HttpCode.ERROR_FILE_NOT_EXIST])
+		} else { //存在同名文件则更新 不管是否是在同一个目录下  【整个系统不允许出现同名文件】
+			article.GetArticleInfoByTitle()
+			article.FolderID = folder_id
+			article.MkValue = string(b)
+			article.Update()
+			return false, errors.New(HttpCode.HttpMsg[HttpCode.FILE_IS_EXIST_AND_UPDATE])
 		}
 
 	}
