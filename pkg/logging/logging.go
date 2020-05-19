@@ -17,6 +17,7 @@ var (
 	levelFlags    = []string{"TRACE", "INFO", "WARN", "ERROR", "FATAL"}
 )
 
+
 type Level int
 
 const (
@@ -33,7 +34,7 @@ func SetUp() {
 	if err != nil {
 		log.Fatal("logging.Setup err: %v", err)
 	}
-	logger = log.New(F, DefaultPrefix, log.LstdFlags)
+	logger = log.New(F, DefaultPrefix, log.LstdFlags|log.Lshortfile)
 }
 
 func Trace(v ...interface{}) {
