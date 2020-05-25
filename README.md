@@ -86,3 +86,16 @@
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170547784.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170604671.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228170654877.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDU4NDI5Mw==,size_16,color_FFFFFF,t_70)
+
+<br>
+
+<br>
+
+
+
+## 更新
+
+1. 2020.5.25，今天生日，狂commit一波😄，个人觉得 config配置可移植性比较强。相关代码有待改进，希望加入全文搜索结合 **ElasticSearch**，以及 **JWT用户验证**
+
+
+
