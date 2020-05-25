@@ -14,7 +14,8 @@ type Server struct {
 
 func (server *Server) DefaultServerConfig() {
 	server.Host = "localhost"
-	server.Port = "8080"
+	server.Port = "9000"
+	server.RunMode = "release"
 }
 
 func (server *Server) InitServerConfig(path string) {

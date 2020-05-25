@@ -21,6 +21,20 @@ func init() {
 func main() {
 	r := router.NewRouter()
 	gin.SetMode(config.Conf.ServerConfig.RunMode)
-	r.Run(config.Conf.ServerConfig.Host+":", config.Conf.ServerConfig.Port)
+	r.Run(config.Conf.ServerConfig.Host+":"+config.Conf.ServerConfig.Port)
+
+
+
+
+	//以下测试内容
+	//log.Println(config.Conf.Cfp)
+	//
+	//log.Println(config.Conf.AppConfig)
+	//
+	//log.Println(config.Conf.ServerConfig)
+	//
+	//log.Println(config.Conf.MySqlConfig)
+	//
+	//log.Println(config.Conf.RedisConfig)
 
 }

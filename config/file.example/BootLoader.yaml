@@ -1,0 +1,4 @@
+AppPath: config/file.example/AppConfig.yaml
+ServerPath: config/file.example/ServerConfig.yaml
+MySqlPath: config/file.example/MySqlConfig.yaml
+RedisPath: config/file.example/RedisConfig.yaml

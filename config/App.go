@@ -8,17 +8,18 @@ import (
 
 type App struct {
 	PageSize       int    `yaml:"PageSize"`
-	Migration      bool   `yaml:"Migration"`
+	MakeMigration      bool   `yaml:"MakeMigration"` //是否进行数据库迁移
 	QiniuAccessKey string `yaml:"QiniuAccessKey"`
 	QiniuSecretKey string `yaml:"QiniuSecretKey"`
 	LogFilePath    string `yaml:"LogFilePath"`
 }
 
 func (app *App) DefaultAppConfig() {
-	app.PageSize = 0
+	app.PageSize = 13
 	app.QiniuAccessKey = ""
 	app.QiniuSecretKey = ""
-	app.LogFilePath = "/note-gin.log"
+	app.MakeMigration=false
+	app.LogFilePath = "panic.log"
 }
 
 func (app *App) InitAppConfig(path string) {
