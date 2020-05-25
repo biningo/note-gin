@@ -1,5 +1,6 @@
 build.go
-.idea
+/.idea
 go.sum
 file
+/.gitignore
 
