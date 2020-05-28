@@ -25,8 +25,10 @@ func SetUp() {
 	//不加s建表
 	DB.SingularTable(true)
 
-	if config.Conf.ServerConfig.RunMode == gin.ReleaseMode {
+	if gin.Mode() == gin.ReleaseMode {
 		DB.LogMode(false)
+	}else if gin.Mode()==gin.DebugMode {
+		DB.LogMode(true)
 	}
 
 	if config.Conf.AppConfig.MakeMigration {
