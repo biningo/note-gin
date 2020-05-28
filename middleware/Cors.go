@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-////// 跨域
+// 跨域
 func Cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method               //请求方法

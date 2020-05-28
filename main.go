@@ -22,5 +22,7 @@ func main() {
 	r := router.NewRouter()
 	gin.SetMode(config.Conf.ServerConfig.RunMode)
 
+
+
 	r.Run(config.Conf.ServerConfig.Host + ":" + config.Conf.ServerConfig.Port)
 }
