@@ -12,6 +12,7 @@ type App struct {
 	QiniuAccessKey string `yaml:"QiniuAccessKey"`
 	QiniuSecretKey string `yaml:"QiniuSecretKey"`
 	LogFilePath    string `yaml:"LogFilePath"`
+	JwtSecretKey    string `yaml:"JwtSecretKey"`
 }
 
 func (app *App) DefaultAppConfig() {
@@ -20,6 +21,7 @@ func (app *App) DefaultAppConfig() {
 	app.QiniuSecretKey = ""
 	app.MakeMigration=false
 	app.LogFilePath = "panic.log"
+	app.JwtSecretKey = "note-gin"
 }
 
 func (app *App) InitAppConfig(path string) {
