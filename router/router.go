@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"note-gin/middleware"
 )
 
 var Router *gin.Engine
@@ -11,7 +12,7 @@ func NewRouter() *gin.Engine {
 
 	//r.Use(middleware.Cors()) //配置跨域
 
-	r.GET("/ping", func(context *gin.Context) {
+	r.GET("/ping",middleware.JwtAuth() ,func(context *gin.Context) {
 		context.Writer.WriteString("Pong")
 
 	})

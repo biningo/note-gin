@@ -6,7 +6,6 @@ import (
 	"note-gin/models"
 	jwt_auth "note-gin/pkg/jwt-auth"
 	"note-gin/pkg/logging"
-	"note-gin/view/common"
 	"time"
 )
 
@@ -20,16 +19,20 @@ func Login(c *gin.Context) {
 		exp := time.Now().Add(time.Minute)
 		claims := make(map[string]interface{})
 		claims["exp"] = exp
-		claims["login_name"] = account.LoginName
-		claims["iat"] = time.Now()
+		claims["loginname"] = account.LoginName
+		claims["iat"] = time.Now().Format("2006-01-02 15:04:05")
 		tokenStr, err := jwt_auth.CreateToken(claims)
 		if err != nil {
 			logging.Error(err)
 		}
+
 		c.JSON(http.StatusOK, gin.H{
 			"token": tokenStr,
 		})
+		return
 
 	}
-	c.JSON(http.StatusUnauthorized, common.ErrorWithMsg("Account Error!"))
+	c.JSON(http.StatusUnauthorized, gin.H{
+		"Msg": "Account Error!",
+	})
 }

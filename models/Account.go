@@ -10,8 +10,8 @@ const (
 
 type Account struct {
 	BaseModel
-	LoginName string
-	PassWord  string
+	LoginName string `form:"loginname" json:"loginname"`
+	PassWord  string `form:"password" json:"password"`
 	Role RoleType
 }
 
