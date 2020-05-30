@@ -2,8 +2,8 @@ package router
 
 import "note-gin/controller/ArticleController"
 
-func ArticleRouter(base string) {
-	r := Router.Group("/" + base)
+func ArticleRouter(root string) {
+	r := Router.Group("/" + root)
 
 	r.GET("/download/:id", ArticleController.ArticleDownLoad)
 	r.GET("/many/:page", ArticleController.GetArticleByPage)

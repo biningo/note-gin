@@ -11,8 +11,6 @@ func NewRouter() *gin.Engine {
 
 	//r.Use(middleware.Cors()) //配置跨域
 
-
-
 	r.GET("/ping", func(context *gin.Context) {
 		context.Writer.WriteString("Pong")
 
@@ -28,5 +26,6 @@ func NewRouter() *gin.Engine {
 	QiniuRouter("qiniu")
 	//TimeLineRouter("time_line")
 	BookRouter("my")
+	AuthRouter("auth")
 	return r
 }

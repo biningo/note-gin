@@ -17,21 +17,21 @@ type MyBook struct {
 	UpdatedAt time.Time `form:"updated_at" json:"updated_at"`
 }
 
-func (this *MyBook) Add() {
-	this.UpdatedAt = time.Now()
-	db.Create(this)
+func (book *MyBook) Add() {
+	book.UpdatedAt = time.Now()
+	db.Create(book)
 }
 
-func (this *MyBook) Delete() {
-	db.Delete(this, "id=?", this.ID)
+func (book *MyBook) Delete() {
+	db.Delete(book, "id=?", book.ID)
 }
 
-func (this MyBook) GetAll() (books []MyBook) {
+func (book MyBook) GetAll() (books []MyBook) {
 	db.Table("my_book").Order("status").Find(&books)
 	return
 }
 
-func (this *MyBook) Save() {
-	this.UpdatedAt = time.Now()
-	db.Save(this)
+func (book *MyBook) Save() {
+	book.UpdatedAt = time.Now()
+	db.Save(book)
 }

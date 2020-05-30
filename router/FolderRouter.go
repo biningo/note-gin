@@ -4,8 +4,8 @@ import (
 	"note-gin/controller/FolderController"
 )
 
-func FolderRouter(base string) {
-	r := Router.Group("/" + base)
+func FolderRouter(root string) {
+	r := Router.Group("/" + root)
 	r.GET("/current", FolderController.GetCurrentNav)
 	r.GET("/sub_file/:page", FolderController.GetSubFile)
 	r.GET("/sub_folder", FolderController.GetSubFolders) //用于编辑文章选择目录时请求

@@ -39,3 +39,11 @@ func ParseTokenAndValid(r *http.Request, tokenStr string) (bool, error) {
 	return false, errors.New("token错误，非法访问")
 
 }
+
+func DestroyToken()  {
+
+}
+
+func RefreshToken(){
+
+}

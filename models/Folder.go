@@ -14,13 +14,13 @@ type Folder struct {
 }
 
 //Find
-func (this Folder) GetRootFolder() (roots []Folder) {
+func (f Folder) GetRootFolder() (roots []Folder) {
 	db.Find(&roots, "folder_id=?", 0)
 	return
 }
 
 //目录路径查找[root->sub]
-func (this Folder) GetFolderPath(FolderID int64, DirPath *[]int64) {
+func (f Folder) GetFolderPath(FolderID int64, DirPath *[]int64) {
 	if FolderID == 0 {
 		return
 	}
@@ -29,87 +29,87 @@ func (this Folder) GetFolderPath(FolderID int64, DirPath *[]int64) {
 
 	if folder.FolderID != 0 {
 		*DirPath = append([]int64{folder.FolderID}, *DirPath...)
-		this.GetFolderPath(folder.FolderID, DirPath)
+		f.GetFolderPath(folder.FolderID, DirPath)
 	} else {
 		return
 	}
 }
 
-func (this Folder) GetFolderByID() {
-	db.Where("id=?", this.ID).First(&this)
+func (f Folder) GetFolderByID() {
+	db.Where("id=?", f.ID).First(&f)
 	return
 }
 
-func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
+func (f Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
 
-	fds = this.GetSubFolderOnPage(page, PageSize)
-	total = this.CountSubFile()
+	fds = f.GetSubFolderOnPage(page, PageSize)
+	total = f.CountSubFile()
 	fdsCount := len(fds)
 	if fdsCount < PageSize && fdsCount > 0 {
-		//page=page-(this.CountSubFolder()/PageSize)  page-1=0
-		articles = this.GetSubArticle(PageSize-fdsCount, 0)
+		//page=page-(f.CountSubFolder()/PageSize)  page-1=0
+		articles = f.GetSubArticle(PageSize-fdsCount, 0)
 	} else if fdsCount == 0 {
-		SubFolderCount := this.CountSubFolder()
+		SubFolderCount := f.CountSubFolder()
 		offset := PageSize - (SubFolderCount % PageSize)
 		page = page - ((SubFolderCount / PageSize) + 1)
-		articles = this.GetSubArticle(PageSize, offset+(page-1)*PageSize)
+		articles = f.GetSubArticle(PageSize, offset+(page-1)*PageSize)
 	}
 	return
 
 }
 
-func (this Folder) GetSubFolders() (folders []Folder) {
-	db.Table("folder").Where("folder_id=?", this.ID).Find(&folders)
+func (f Folder) GetSubFolders() (folders []Folder) {
+	db.Table("folder").Where("folder_id=?", f.ID).Find(&folders)
 	return
 }
 
-func (this Folder) GetSubFolderOnPage(page, PageSize int) (fds []Folder) {
-	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", this.ID)
+func (f Folder) GetSubFolderOnPage(page, PageSize int) (fds []Folder) {
+	db.Limit(PageSize).Offset((page-1)*PageSize).Find(&fds, "folder_id=?", f.ID)
 	return
 }
 
-func (this Folder) GetSubArticle(limit, offset int) (articles []Article) {
-	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Select([]string{"id", "title", "updated_at", "publish_blog"}).Find(&articles, "folder_id=?", this.ID)
+func (f Folder) GetSubArticle(limit, offset int) (articles []Article) {
+	db.Limit(limit).Offset(offset).Where("deleted=?", 0).Select([]string{"id", "title", "updated_at", "publish_blog"}).Find(&articles, "folder_id=?", f.ID)
 	return
 }
 
-func (this Folder) GetFolderInfo() {
-	db.Where(this).First(&this)
+func (f Folder) GetFolderInfo() {
+	db.Where(f).First(&f)
 }
 
-func (this Folder) GetFolderByTitle() {
-	db.Where("title=?", this.Title).First(&this)
+func (f Folder) GetFolderByTitle() {
+	db.Where("title=?", f.Title).First(&f)
 }
 
 //count
-func (this Folder) CountSubFile() int {
-	sum := this.CountSubFolder() + this.CountSubArticle()
+func (f Folder) CountSubFile() int {
+	sum := f.CountSubFolder() + f.CountSubArticle()
 	return sum
 }
 
-func (this Folder) CountSubFolder() (count int) {
-	db.Table("folder").Where("folder_id=?", this.ID).Count(&count)
+func (f Folder) CountSubFolder() (count int) {
+	db.Table("folder").Where("folder_id=?", f.ID).Count(&count)
 	return
 }
-func (this Folder) CountSubArticle() (count int) {
-	db.Model(&Article{}).Where("folder_id=? and deleted=?", this.ID, 0).Count(&count)
+func (f Folder) CountSubArticle() (count int) {
+	db.Model(&Article{}).Where("folder_id=? and deleted=?", f.ID, 0).Count(&count)
 	return
 }
 
 //Create
-func (this *Folder) Add() {
-	db.Create(this)
+func (f *Folder) Add() {
+	db.Create(f)
 }
 
 //Update
-func (this *Folder) Update() {
-	db.Model(this).Where("id=?", this.ID).Updates(map[string]interface{}{"title": this.Title, "updated_at": time.Now()})
+func (f *Folder) Update() {
+	db.Model(f).Where("id=?", f.ID).Updates(map[string]interface{}{"title": f.Title, "updated_at": time.Now()})
 }
 
 //Delete递归删除
-func (this *Folder) Delete() {
-	db.Delete(this)
-	deleteDFS(this.ID)
+func (f *Folder) Delete() {
+	db.Delete(f)
+	deleteDFS(f.ID)
 }
 func deleteDFS(FolderID int64) {
 	db.Table("article").Where("folder_id=?", FolderID).Update("deleted", true)
