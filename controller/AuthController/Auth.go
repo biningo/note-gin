@@ -18,9 +18,13 @@ func Login(c *gin.Context) {
 	if account.LoginName == "biningo" && account.PassWord == "55555" {
 		exp := time.Now().Add(time.Minute)
 		claims := make(map[string]interface{})
+
+		//info
 		claims["exp"] = exp
 		claims["loginname"] = account.LoginName
-		claims["iat"] = time.Now().Format("2006-01-02 15:04:05")
+		claims["iat"] = time.Now().Format(time.RFC3339)
+
+
 		tokenStr, err := jwt_auth.CreateToken(claims)
 		if err != nil {
 			logging.Error(err)
@@ -30,7 +34,6 @@ func Login(c *gin.Context) {
 			"token": tokenStr,
 		})
 		return
-
 	}
 	c.JSON(http.StatusUnauthorized, gin.H{
 		"Msg": "Account Error!",

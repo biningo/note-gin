@@ -12,7 +12,7 @@ func NewRouter() *gin.Engine {
 
 	//r.Use(middleware.Cors()) //配置跨域
 
-	r.GET("/ping",middleware.JwtAuth() ,func(context *gin.Context) {
+	r.GET("/ping",func(context *gin.Context) {
 		context.Writer.WriteString("Pong")
 
 	})
@@ -21,12 +21,13 @@ func NewRouter() *gin.Engine {
 	})
 
 	Router = r
-
-	FolderRouter("folder")
-	ArticleRouter("article")
-	QiniuRouter("qiniu")
-	//TimeLineRouter("time_line")
-	BookRouter("my")
 	AuthRouter("auth")
+
+	FolderRouter("folder", middleware.JwtAuth())
+	ArticleRouter("article", middleware.JwtAuth())
+	QiniuRouter("qiniu", middleware.JwtAuth())
+	//TimeLineRouter("time_line")
+	BookRouter("my", middleware.JwtAuth())
+
 	return r
 }

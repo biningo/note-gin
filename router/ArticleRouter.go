@@ -1,9 +1,13 @@
 package router
 
-import "note-gin/controller/ArticleController"
+import (
+	"github.com/gin-gonic/gin"
+	"note-gin/controller/ArticleController"
+)
 
-func ArticleRouter(root string) {
+func ArticleRouter(root string,middleware...gin.HandlerFunc) {
 	r := Router.Group("/" + root)
+	r.Use(middleware...)
 
 	r.GET("/download/:id", ArticleController.ArticleDownLoad)
 	r.GET("/many/:page", ArticleController.GetArticleByPage)
