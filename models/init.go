@@ -32,7 +32,7 @@ func SetUp() {
 	}
 
 	if config.Conf.AppConfig.MakeMigration {
-		migration(db) //迁移  首次创建数据库需要迁移创建表
+		migration(DB) //迁移  首次创建数据库需要迁移创建表
 	}
 
 	db = DB
