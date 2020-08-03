@@ -1,4 +1,0 @@
-Addr: localhost
-Port: 6379
-DataBaseNumber: 1
-PassWord: 12345

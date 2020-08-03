@@ -1,5 +1,0 @@
-Addr: localhost
-Port: 3306
-DataBaseName: note
-UserName: root
-PassWord: 12345
