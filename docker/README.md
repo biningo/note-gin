@@ -15,3 +15,7 @@ JwtSecretKey: "note-gin"
 
 <br>
 
+## 2、关于Docker注意的点
+
+axios在请求后端资源的时候，发出的http请求其实是在宿主机层面的，不是在容器层面的，所以请求需要发送到后端docker容器在宿主机射影的地址上
+
