@@ -28,4 +28,7 @@ func (app *App) InitAppConfig(path string) {
 	if err := yaml.Unmarshal(file, app); err != nil {
 		log.Println("ERROR", err)
 	}
+	if app.PageSize<=0{
+		app.PageSize=13
+	}
 }

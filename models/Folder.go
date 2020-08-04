@@ -41,7 +41,9 @@ func (this Folder) GetFolderByID() {
 }
 
 func (this Folder) GetSubFile(page int) (fds []Folder, articles []Article, total int) {
-
+	if PageSize<=0{
+		PageSize=13
+	}
 	fds = this.GetSubFolderOnPage(page, PageSize)
 	total = this.CountSubFile()
 	fdsCount := len(fds)
