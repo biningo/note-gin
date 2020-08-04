@@ -1,0 +1,39 @@
+version: '3'
+services:
+  redis:
+    image: 'redis'
+    container_name: 'redis'
+    ports:
+      - "6379:6379"
+    restart: 'always'
+  mysql:
+    image: 'mysql'
+    container_name: 'mysql'
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: '55555'
+      MYSQL_DATABASE: 'note'
+    restart: 'always'
+  note-gin:
+    container_name: "note-gin"
+    build: .
+    image: 'note-gin'
+    ports:
+      - "9000:9000"
+    depends_on:
+      - redis
+      - mysql
+    restart: 'always'
+  note-vue:
+    container_name: "note-vue"
+    build:
+      context: ./note-gin
+      dockerfile: Dockerfile
+    image: 'note-vue'
+    ports:
+      - "8000:80"
+    depends_on:
+      - note-gin
+    restart: 'always'
