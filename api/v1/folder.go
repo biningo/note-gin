@@ -2,10 +2,11 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
+	"note-gin/pkg"
 	"note-gin/pkg/HttpCode"
 	"note-gin/pkg/RedisClient"
-	"note-gin/pkg/utils"
 	"note-gin/service/FolderService"
+	"note-gin/view"
 	"note-gin/view/FolderView"
 	"note-gin/view/common"
 )
@@ -16,31 +17,29 @@ import (
 *@Describe
 **/
 
-func Add(c *gin.Context) {
-	Title := c.Query("title")
-	FatherTitle := c.Query("FatherTitle")
+func AddFolder(c *gin.Context) {
+	//Title := c.Query("title")
+	//FatherTitle := c.Query("FatherTitle")
 
-	FolderService.Add(Title, FatherTitle)
-	c.JSON(200, common.OkWithMsg("目录创建成功！"))
+	c.JSON(200, view.OkWithMsg("目录创建成功！"))
 }
 
-func Delete(c *gin.Context) {
-	id:=c.Query("id")
-	ID:=FolderService.Delete(id)
-	c.JSON(200, common.OkWithData("删除目录成功！",ID))
+func DeleteFolder(c *gin.Context) {
+	c.Param("id")
+	//ID:=FolderService.Delete(id)
+	c.JSON(200, view.OkWithMsg(("删除目录成功！")))
 }
-
 
 func GetCurrentNav(c *gin.Context) {
 	nav := RedisClient.GetCurrentNav()
 	nav = append(nav, "Home")
-	c.JSON(200, common.OkWithData("", nav))
+	c.JSON(200, view.OkWithData("", nav))
 }
 
 func GetSubFile(c *gin.Context) {
 	page := c.Param("page")
 	folder_title := c.Query("title")
-	folderInfos, articleInfos, total := FolderService.GetSubFile(folder_title, utils.StrToInt(page))
+	folderInfos, articleInfos, total := FolderService.GetSubFile(folder_title, pkg.StrToInt(page))
 	//导航
 	nav := FolderService.ChangeNav(page, folder_title)
 	resp := common.FileList{
@@ -56,15 +55,14 @@ func GetSubFile(c *gin.Context) {
 func GetSubFolders(c *gin.Context) {
 	id := c.Param("id")
 	folderSelectList := FolderService.GetSubFolders(id)
-	c.JSON(200, common.OkWithData("", folderSelectList))
+	c.JSON(200, view.OkWithData("", folderSelectList))
 }
 
-func Update(c *gin.Context) {
-	folderInfo:=FolderView.FolderInfo{}
+func UpdateFolder(c *gin.Context) {
+	folderInfo := FolderView.FolderInfo{}
 	err := c.ShouldBind(&folderInfo)
-	if err!=nil{
-		logging.Error(err.Error())
+	if err != nil {
 	}
 	FolderService.Update(folderInfo)
-	c.JSON(HttpCode.SUCCESS, common.OkWithMsg("修改成功！"))
+	c.JSON(HttpCode.SUCCESS, view.OkWithMsg("修改成功！"))
 }

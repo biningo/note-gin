@@ -1,4 +1,14 @@
-package common
+package view
+type DataList struct {
+	Items interface{} `form:"items" json:"items"`
+	Total int64       `form:"total" json:"total"`
+}
+type FileList struct {
+	Folders  []FolderInfo
+	Articles []ArticleInfo
+	Nav      []string
+	Total    int
+}
 
 type RespBean struct {
 	Code int `form:"code" json:"code"`

@@ -1,30 +1,36 @@
-package FolderService
+package service
 
 import (
-	"note-gin/models"
+	"note-gin/model"
+	"note-gin/pkg"
 	"note-gin/pkg/RedisClient"
-	"note-gin/pkg/utils"
-	"note-gin/view/ArticleView"
+	"note-gin/view"
 	"note-gin/view/FolderView"
 )
 
-func GetFolderPath(FolderID int64, DirPath *[]int64) {
+/**
+*@Author lyer
+*@Date 2/22/21 16:23
+*@Describe
+**/
+
+func GetFolderPath(FolderID int, DirPath *[]int) {
 	model.Folder{}.GetFolderPath(FolderID, DirPath)
 }
 
-func GetFolderByTitle(folder_title string) FolderView.FolderInfo {
+func GetFolderByTitle(folder_title string) view.FolderInfo {
 	folderInfo := FolderView.ToFolderInfo(model.Folder{Title: folder_title})
 	return folderInfo
 }
 
-func GetSubFile(folder_title string, page int) ([]FolderView.FolderInfo, []ArticleView.ArticleInfo, int) {
+func GetSubFile(folder_title string, page int) ([]FolderView.FolderInfo, []view.ArticleInfo, int) {
 	folder := model.Folder{}
 
 	folder.Title = folder_title
 	folder.GetFolderByTitle()
 
 	folders, articles, total := folder.GetSubFile(page) //根据页码查找这个目录下的全部文件 total
-	articleInfos := ArticleView.ToArticleInfos(articles)
+	articleInfos := view.ToArticleInfos(articles)
 	folderInfos := FolderView.ToFolderInfos(folders)
 
 	return folderInfos, articleInfos, total
@@ -42,7 +48,7 @@ func ChangeNav(page string, folder_title string) []string {
 
 func GetSubFolders(id string) []FolderView.FolderSelectView {
 	folder := model.Folder{}
-	folder.ID = int64(utils.StrToInt(id))
+	folder.ID = int64(pkg.StrToInt(id))
 	folders := folder.GetSubFolders()
 	//这里出错了一个小细节  make指定长度切片就可以直接引用位置了 如果再append的方式加入元素则会重新创建空间
 	folderSelectList := make([]FolderView.FolderSelectView, len(folders))
@@ -56,7 +62,7 @@ func GetSubFolders(id string) []FolderView.FolderSelectView {
 	return folderSelectList
 }
 
-func Update(folderInfo FolderView.FolderInfo) {
+func UpdateFolder(folderInfo FolderView.FolderInfo) {
 	folder := FolderView.ToFolder(folderInfo)
 	folder.Update()
 }
@@ -73,9 +79,9 @@ func Add(title string, fatherTitle string) {
 	folder.Add()
 }
 
-func Delete(id string) int64 {
+func DeleteFolder(id string) int64 {
 	folder := model.Folder{}
-	folder.ID = int64(utils.StrToInt(id))
+	folder.ID = int64(pkg.StrToInt(id))
 	folder.Delete()
 	return folder.ID
 }

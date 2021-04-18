@@ -20,7 +20,7 @@ func (this Folder) GetRootFolder() (roots []Folder) {
 }
 
 //目录路径查找[root->sub]
-func (this Folder) GetFolderPath(FolderID int64, DirPath *[]int64) {
+func (this Folder) GetFolderPath(FolderID int, DirPath *[]int) {
 	if FolderID == 0 {
 		return
 	}
@@ -28,7 +28,7 @@ func (this Folder) GetFolderPath(FolderID int64, DirPath *[]int64) {
 	db.Where("id=?", FolderID).First(&folder)
 
 	if folder.FolderID != 0 {
-		*DirPath = append([]int64{folder.FolderID}, *DirPath...)
+		*DirPath = append([]int{folder.FolderID}, *DirPath...)
 		this.GetFolderPath(folder.FolderID, DirPath)
 	} else {
 		return

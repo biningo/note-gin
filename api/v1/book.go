@@ -2,9 +2,8 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"note-gin/pkg/HttpCode"
-	"note-gin/pkg/utils"
-	"note-gin/view/common"
+	"note-gin/model"
+	"note-gin/view"
 )
 
 /**
@@ -13,35 +12,27 @@ import (
 *@Describe
 **/
 
-
 func AddBook(c *gin.Context) {
-	book := model.MyBook{}
-	err := c.ShouldBind(&book)
-	logging.Error(err.Error())
-	book.Add()
-	c.JSON(HttpCode.SUCCESS, common.OkWithData("添加成功!", book))
+	book := model.Book{}
+	c.ShouldBind(&book)
+	c.JSON(200, view.OkWithData("添加成功!", book))
 }
 
 func UpdateBook(c *gin.Context) {
-	book := model.MyBook{}
-	err := c.ShouldBind(&book)
-	utils.ErrReport(err)
-	book.Save()
-	c.JSON(HttpCode.SUCCESS, common.OkWithMsg("修改成功!"))
+	book := model.Book{}
+	c.ShouldBind(&book)
+	c.JSON(200, view.OkWithMsg("修改成功!"))
 }
-
 
 func DeleteBook(c *gin.Context) {
-	book := model.MyBook{}
-	book.ID = int64(utils.StrToInt(c.Param("id")))
-	book.Delete()
-	c.JSON(200, common.OkWithMsg("删除成功!"))
+	c.Param("id")
+	c.JSON(200, view.OkWithMsg("删除成功!"))
 }
 
-//Book
+//Get all book
 func GetAllBook(c *gin.Context) {
-	books := model.MyBook{}.GetAll()
-	c.JSON(200, common.DataList{
+	books := []model.Book{}
+	c.JSON(200, view.DataList{
 		Items: books,
 		Total: int64(len(books)),
 	})

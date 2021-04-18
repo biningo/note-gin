@@ -3,11 +3,11 @@ package RedisClient
 import (
 	"encoding/json"
 	"note-gin/pkg/utils"
-	"note-gin/view/ArticleView"
+	"note-gin/view"
 	"time"
 )
 
-func GetTempEdit(article_view *ArticleView.ArticleEditView) bool {
+func GetTempEdit(article_view *view.ArticleEditView) bool {
 	isExist := RedisClient.Exists("temp_edit").Val()
 	if isExist == 1 {
 		s := RedisClient.Get("temp_edit").Val()
@@ -20,7 +20,7 @@ func GetTempEdit(article_view *ArticleView.ArticleEditView) bool {
 	}
 }
 
-func SaveTempEdit(temp ArticleView.ArticleEditView) string {
+func SaveTempEdit(temp view.ArticleEditView) string {
 	s, _ := json.Marshal(temp)                                 //直接序列化存储了 因为还需要考虑没有ID的临时编辑
 	return RedisClient.Set("temp_edit", s, time.Hour*24).Val() //1天
 }

@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"bytes"
+	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/qiniu/api.v7/v7/auth/qbox"
@@ -8,7 +10,7 @@ import (
 	"io/ioutil"
 	"log"
 	"note-gin/pkg/QiniuClient"
-	"note-gin/view/common"
+	"note-gin/view"
 )
 
 /**
@@ -16,7 +18,6 @@ import (
 *@Date 2/22/21 15:41
 *@Describe
 **/
-
 
 var accessKey = QiniuClient.QiniuAccessKey
 var secretKey = QiniuClient.QiniuSecretKey
@@ -51,7 +52,7 @@ func ImgUpload(c *gin.Context) {
 	FileInfo, err := manager.Stat(bucket, key)
 	if FileInfo.Fsize != 0 { //图片存在
 		url := "http://gin-note.binnb.top/" + key
-		c.JSON(200, common.OkWithData("图片已经存在!", url))
+		c.JSON(200, view.OkWithData("图片已经存在!", url))
 		return
 	}
 
@@ -65,7 +66,7 @@ func ImgUpload(c *gin.Context) {
 
 	url := "http://gin-note.binnb.top/" + key
 	log.Println("上传图片：", url)
-	c.JSON(200, common.OkWithData("图片上传成功!", url))
+	c.JSON(200, view.OkWithData("图片上传成功!", url))
 }
 
 func ImgDelete(c *gin.Context) {
@@ -85,8 +86,8 @@ func ImgDelete(c *gin.Context) {
 
 	err := bucketManager.Delete(bucket, key)
 	if err != nil {
-		c.JSON(200, common.ErrorWithMsg("云存储图片删除失败!"))
+		c.JSON(200, view.ErrorWithMsg("云存储图片删除失败!"))
 	} else {
-		c.JSON(200, common.OkWithMsg("云存储图片删除成功!"))
+		c.JSON(200, view.OkWithMsg("云存储图片删除成功!"))
 	}
 }

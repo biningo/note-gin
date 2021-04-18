@@ -1,4 +1,10 @@
-package HttpCode
+package view
+
+/**
+*@Author lyer
+*@Date 2/22/21 17:01
+*@Describe
+**/
 
 var HttpMsg = map[int]string{
 
@@ -11,3 +17,15 @@ var HttpMsg = map[int]string{
 	ERROR_FILE_IS_EXIST:      "存在同名文件",
 	FILE_IS_EXIST_AND_UPDATE: "存在同名文件，文件已经更新",
 }
+
+const (
+	SUCCESS = 200
+	ERROR   = 500
+
+	ERROR_FILE_TYPE          = 10000
+	ERROR_FILE_NOT_EXIST     = 10001
+	ERROR_TEMP_SAVE          = 10002
+	ERROR_RECOVER            = 10003
+	ERROR_FILE_IS_EXIST      = 10004
+	FILE_IS_EXIST_AND_UPDATE = 10005
+)
